@@ -31,7 +31,7 @@ function getWaLink(product: Product): string {
     {products.map((product, index) => (
       <div class={`produk-card ${product.cardClass} reveal`} style={`transition-delay:${0.1 + index * 0.1}s`}>
         <div class="card-img-wrap">
-          <img src={product.image} alt={product.name} class="card-image" />
+          <img src={product.image.src} alt={product.name} class="card-image" loading="lazy" />
           <div class="card-badge-new">BARU!</div>
           <div class="card-badge-halal">☽ HALAL</div>
         </div>

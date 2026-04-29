@@ -2,6 +2,7 @@
 import KoGanTI from '../assets/KoGanTI.webp';
 import Nirlawa from '../assets/Nirlawa.webp';
 import Mahakunir from '../assets/Mahakunir.webp';
+import type { ImageMetadata } from 'astro';
 
 export interface Product {
   id: string;
