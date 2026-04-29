@@ -54,5 +54,37 @@ const pixelScript =
       />
     </noscript>
     <!-- End Meta Pixel Noscript -->
+
+    <!-- WA Link Click Tracker -->
+    <script>
+      {`
+      (function() {
+        function detectSource(el) {
+          var walk = el;
+          while (walk && walk !== document.body) {
+            var id = (walk.id || '').toLowerCase();
+            var cls = (walk.className || '').toString().toLowerCase();
+            if (/navbar|nav-/.test(id) || /nav-/.test(cls)) return 'Navbar';
+            if (/sticky/.test(id) || /sticky/.test(cls)) return 'Sticky WA';
+            if (/cta/.test(id) || /cta/.test(cls)) return 'CTA';
+            if (/hero/.test(id) || /hero/.test(cls)) return 'Hero';
+            if (/produk|card/.test(id) || /produk|card/.test(cls)) return 'Products';
+            walk = walk.parentElement;
+          }
+          return 'Other';
+        }
+        document.addEventListener('click', function(e) {
+          if (typeof window.fbq !== 'function') return;
+          var a = e.target.closest('a[href*="wa.me"]');
+          if (!a) return;
+          var source = detectSource(a);
+          window.fbq('track', 'Contact', {
+            content_name: 'WhatsApp Click - ' + source,
+            source: source
+          });
+        }, true);
+      })();
+      `}
+    </script>
   </>
 )}

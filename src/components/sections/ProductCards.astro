@@ -2,12 +2,14 @@
 import { products, type Product } from '../../data/products';
 import Icon from '../shared/Icon.astro';
 import HalalLogo from '../shared/HalalLogo.astro';
+import { getWA_NUMBER } from '../../utils/wa';
 
 interface Props {
   waBaseLink?: string;
 }
 
-const { waBaseLink = 'https://wa.me/628XXXXXXXXXX' } = Astro.props;
+const waNum = getWA_NUMBER();
+const { waBaseLink = `https://wa.me/${waNum}` } = Astro.props;
 
 function getWaLink(product: Product): string {
   return `${waBaseLink}?text=${encodeURIComponent(product.waMessage)}`;

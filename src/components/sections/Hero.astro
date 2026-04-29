@@ -1,5 +1,6 @@
 ---
 import Icon from '../shared/Icon.astro';
+import { buildWALink } from '../../utils/wa';
 
 interface Props {
   waLink?: string;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const {
-  waLink = 'https://wa.me/6281225463341?text=Halo+GoJamu,+saya+ingin+tahu+lebih+lanjut+tentang+produk+herbal+Anda',
+  waLink = buildWALink('Halo GoJamu, saya ingin tahu lebih lanjut tentang produk herbal Anda'),
   learnMoreLink = '#produk',
 } = Astro.props;
 ---
