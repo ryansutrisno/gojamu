@@ -1,3 +1,13 @@
+## [1.3.0](https://github.com/ryansutrisno/gojamu/compare/v1.2.1...v1.3.0) (2026-04-29)
+
+### Features
+
+* centralize WA links via env var and add Meta Pixel click tracking ([84586ff](https://github.com/ryansutrisno/gojamu/commit/84586ffb6f514e40be55a0cff17bf2341ff3dd49))
+
+### Documentation
+
+* update WhatsApp integration section in README ([e4157a5](https://github.com/ryansutrisno/gojamu/commit/e4157a506415ccb7c5c6278586cc332affa92adb))
+
 ## [1.2.1](https://github.com/ryansutrisno/gojamu/compare/v1.2.0...v1.2.1) (2026-04-29)
 
 ### Documentation
