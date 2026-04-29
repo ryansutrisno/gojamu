@@ -1,4 +1,4 @@
-name: Auto Release
+name: Release
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -7,28 +7,25 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
+      - master
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Release version (e.g., v1.0.0)'
-        required: true
-        type: string
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   release:
-    name: Create Release
+    name: Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: read
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,51 +36,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify the integrity of provenance attestations and registry signatures
+        run: npm audit signatures
+
       - name: Build
         run: npm run build
 
-      - name: Get version
-        id: version
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-          else
-            # Auto-generate version from branch push (main)
-            SHORT_SHA=${{ github.sha }}
-            SHORT_SHA=${SHORT_SHA:0:7}
-            TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-            echo "version=auto-${TIMESTAMP}-${SHORT_SHA}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -n "$PREVIOUS_TAG" ]; then
-            CHANGES=$(git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s (%h)" --no-merges)
-          else
-            CHANGES=$(git log --pretty=format:"- %s (%h)" --no-merges)
-          fi
-          echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGES" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.version.outputs.version }}
-          name: Release ${{ steps.version.outputs.version }}
-          body: |
-            ## 🚀 Changelog
-
-            ${{ steps.changelog.outputs.changelog }}
-
-            ---
-            **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.version.outputs.version }}...HEAD
-          draft: false
-          prerelease: false
-          generate_release_notes: true
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+      - name: Update CHANGELOG.md
+        if: success()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add CHANGELOG.md 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "docs: update CHANGELOG.md [skip ci]"
+          git push

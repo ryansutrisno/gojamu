@@ -35,10 +35,10 @@ const whyItems: WhyItem[] = [
   <div class="keunggulan-inner">
     <div class="keunggulan-visual reveal">
       <div class="keung-circle">
-        <Icon name="leaf" emoji="🌿" size={112} />
-        <div class="keung-orbit orbit-1"><Icon name="microscope" emoji="🔬" size={26} /></div>
-        <div class="keung-orbit orbit-2"><Icon name="crescent-moon" emoji="☽" size={26} /></div>
-        <div class="keung-orbit orbit-3"><Icon name="wheat" emoji="🌾" size={26} /></div>
+        <div class="main-icon"><Icon name="leaf" emoji="🌿" size={48} /></div>
+        <div class="keung-orbit orbit-1"><Icon name="microscope" emoji="🔬" size={24} /></div>
+        <div class="keung-orbit orbit-2"><Icon name="crescent-moon" emoji="☽" size={24} /></div>
+        <div class="keung-orbit orbit-3"><Icon name="wheat" emoji="🌾" size={24} /></div>
       </div>
     </div>
     <div class="reveal" style="transition-delay:.15s">
@@ -103,6 +103,12 @@ const whyItems: WhyItem[] = [
     box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
     animation: pulse-soft 4s ease-in-out infinite;
   }
+  @media (max-width: 760px) {
+    .keung-circle {
+      width: 220px;
+      height: 220px;
+    }
+  }
   @keyframes pulse-soft {
     0%,
     100% {
@@ -112,6 +118,32 @@ const whyItems: WhyItem[] = [
     50% {
       transform: scale(1.03);
       box-shadow: 0 28px 70px rgba(45, 106, 79, 0.3);
+    }
+  }
+  .main-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(3rem, 12vw, 5rem);
+    line-height: 1;
+  }
+  .keung-orbit {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    line-height: 1;
+  }
+  @media (max-width: 760px) {
+    .keung-orbit {
+      width: 48px;
+      height: 48px;
     }
   }
   .keung-orbit {

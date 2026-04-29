@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "dependencies": {
     "@astrojs/vercel": "^8.2.11",
     "astro": "^5.18.1"
+  },
+  "devDependencies": {
+    "semantic-release": "^24.2.7"
   }
 }
