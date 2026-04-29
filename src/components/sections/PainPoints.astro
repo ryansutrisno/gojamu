@@ -1,28 +1,35 @@
 ---
+import Icon from '../shared/Icon.astro';
+
 interface PainPoint {
   icon: string;
+  emoji: string;
   title: string;
   desc: string;
 }
 
 const painPoints: PainPoint[] = [
   {
-    icon: '😓',
+    icon: 'tired',
+    emoji: '😓',
     title: 'Mudah Lelah & Kurang Bertenaga',
     desc: 'Tubuh terasa berat, semangat menurun, produktivitas terganggu sejak pagi hari.',
   },
   {
-    icon: '🤢',
+    icon: 'nauseated',
+    emoji: '🤢',
     title: 'Lambung Sering Tidak Nyaman',
     desc: 'Perut kembung, mual, atau nyeri lambung yang mengganggu aktivitas sehari-hari.',
   },
   {
-    icon: '😔',
+    icon: 'sad',
+    emoji: '😔',
     title: 'Kulit Kusam & Tidak Glowing',
     desc: 'Kulit terlihat lelah, tidak cerah, dan tidak memancarkan kecantikan alami Anda.',
   },
   {
-    icon: '🛡️',
+    icon: 'shield',
+    emoji: '🛡️',
     title: 'Imun Lemah, Mudah Sakit',
     desc: 'Daya tahan tubuh menurun, rentan terhadap virus dan bakteri di sekitar kita.',
   },
@@ -45,7 +52,7 @@ const painPoints: PainPoint[] = [
     <div class="pain-grid reveal" style="transition-delay:.15s">
       {painPoints.map((point) => (
         <div class="pain-card">
-          <div class="pain-icon">{point.icon}</div>
+          <div class="pain-icon"><Icon name={point.icon} emoji={point.emoji} size={32} /></div>
           <div class="pain-title">{point.title}</div>
           <div class="pain-desc">{point.desc}</div>
         </div>
@@ -89,8 +96,10 @@ const painPoints: PainPoint[] = [
     transform: translateY(-4px);
   }
   .pain-icon {
-    font-size: 2rem;
     margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .pain-title {
     font-family: 'Playfair Display', serif;

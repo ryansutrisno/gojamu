@@ -1,5 +1,6 @@
 ---
 import { products, type Product } from '../../data/products';
+import Icon from '../shared/Icon.astro';
 
 interface Props {
   waBaseLink?: string;
@@ -30,7 +31,7 @@ function getWaLink(product: Product): string {
     {products.map((product, index) => (
       <div class={`produk-card ${product.cardClass} reveal`} style={`transition-delay:${0.1 + index * 0.1}s`}>
         <div class="card-img-wrap">
-          <div class="card-emoji">{product.emoji}</div>
+          <div class="card-icon"><Icon name={product.icon} emoji={product.emoji} size={80} /></div>
           <div class="card-badge-new">BARU!</div>
           <div class="card-badge-halal">☽ HALAL</div>
         </div>
@@ -42,7 +43,7 @@ function getWaLink(product: Product): string {
           <ul class="card-benefits">
             {product.benefits.map((benefit) => (
               <li>
-                <span class="benefit-dot">✓</span>
+                <span class="benefit-dot"><Icon name="check" emoji="✓" size={12} /></span>
                 {benefit}
               </li>
             ))}
@@ -134,9 +135,11 @@ function getWaLink(product: Product): string {
     background: linear-gradient(135deg, #fde8ee 0%, #f5c6d6 100%);
   }
 
-  .card-emoji {
-    font-size: 5rem;
+  .card-icon {
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-badge-new {
@@ -235,7 +238,6 @@ function getWaLink(product: Product): string {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
     flex-shrink: 0;
     margin-top: 1px;
   }

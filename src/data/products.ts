@@ -4,6 +4,7 @@ export interface Product {
   subtitle: string;
   tag: string;
   emoji: string;
+  icon: string;
   cardClass: 'card-koganti' | 'card-nirlawa' | 'card-mahakunir';
   claim: string;
   benefits: string[];
@@ -17,6 +18,7 @@ export const products: Product[] = [
     subtitle: 'Teh Celup Balakacida — 10 Tea Bags',
     tag: 'Anti Kanker · Antioksidan',
     emoji: '🍃',
+    icon: 'leaf',
     cardClass: 'card-koganti',
     claim: '"Perlindungan alami dari dalam, melawan radikal bebas dan sel kanker setiap hari."',
     benefits: [
@@ -34,6 +36,7 @@ export const products: Product[] = [
     subtitle: 'Kunir & Temulawak — 100g',
     tag: 'Kesehatan Lambung',
     emoji: '💙',
+    icon: 'heart',
     cardClass: 'card-nirlawa',
     claim: '"Sehatkan lambungmu secara alami — solusi terpercaya untuk pencernaan optimal setiap hari."',
     benefits: [
@@ -51,6 +54,7 @@ export const products: Product[] = [
     subtitle: 'Original Kunir — 100g',
     tag: 'Kecantikan · Perempuan',
     emoji: '🌸',
+    icon: 'flower',
     cardClass: 'card-mahakunir',
     claim: '"Cantik alami dari dalam — kulit glowing, tubuh sehat, kepercayaan diri memancar setiap hari."',
     benefits: [

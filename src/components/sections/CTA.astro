@@ -1,4 +1,6 @@
 ---
+import Icon from '../shared/Icon.astro';
+
 interface Props {
   waLink?: string;
 }
@@ -18,7 +20,7 @@ const {
     Konsultasikan kebutuhan kesehatan Anda secara gratis bersama tim GoJamu. Kami siap membantu Anda
     memilih produk yang paling tepat.
   </p>
-  <div class="cta-buttons reveal">
+<div class="cta-buttons reveal">
     <a href={waLink} class="btn-wa-lg" target="_blank">
       <svg viewBox="0 0 24 24">
         <path
@@ -31,7 +33,7 @@ const {
       Konsultasi GRATIS via WhatsApp
     </a>
   </div>
-  <p class="wa-hint reveal">💬 Respon cepat · Tidak ada paksaan beli · Konsultasi ramah &amp; personal</p>
+  <p class="wa-hint reveal"><Icon name="chat-bubble" emoji="💬" size={16} /> Respon cepat · Tidak ada paksaan beli · Konsultasi ramah &amp; personal</p>
 </section>
 
 <style>

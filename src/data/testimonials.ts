@@ -3,6 +3,7 @@ export interface Testimonial {
   name: string;
   location: string;
   avatarEmoji: string;
+  avatarIcon: string;
   avatarClass: 'av-green' | 'av-blue' | 'av-pink';
   productBadge: string;
   badgeClass: 'badge-g' | 'badge-b' | 'badge-p';
@@ -14,6 +15,7 @@ export const testimonials: Testimonial[] = [
     name: 'Bapak Hendra S.',
     location: 'Surabaya, Jawa Timur',
     avatarEmoji: '👨',
+    avatarIcon: 'person',
     avatarClass: 'av-green',
     productBadge: 'Ko Gan Ti',
     badgeClass: 'badge-g',
@@ -23,6 +25,7 @@ export const testimonials: Testimonial[] = [
     name: 'Ibu Ratna W.',
     location: 'Bandung, Jawa Barat',
     avatarEmoji: '👩',
+    avatarIcon: 'person',
     avatarClass: 'av-blue',
     productBadge: 'Nirlawa',
     badgeClass: 'badge-b',
@@ -32,6 +35,7 @@ export const testimonials: Testimonial[] = [
     name: 'Sari Dewi A.',
     location: 'Jakarta Selatan',
     avatarEmoji: '👩',
+    avatarIcon: 'person',
     avatarClass: 'av-pink',
     productBadge: 'Mahakunir',
     badgeClass: 'badge-p',

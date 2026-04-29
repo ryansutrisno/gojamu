@@ -1,4 +1,6 @@
 ---
+import Icon from '../shared/Icon.astro';
+
 interface Props {
   waLink?: string;
   learnMoreLink?: string;
@@ -11,7 +13,7 @@ const {
 ---
 
 <section id="hero">
-  <div class="hero-badge">100% Herbal Alami · Tanpa Bahan Kimia</div>
+  <div class="hero-badge"><Icon name="leaf" size={14} /> 100% Herbal Alami · Tanpa Bahan Kimia</div>
   <h1 class="hero-title">
     Tubuh Sehat Dimulai dari<br />
     <em>Alam yang Terjaga</em>
@@ -22,9 +24,9 @@ const {
   </p>
 
   <div class="hero-products">
-    <div class="prod-pill pill-green">🍃 Ko Gan Ti – Anti Kanker</div>
-    <div class="prod-pill pill-blue">💙 Nirlawa – Lambung Sehat</div>
-    <div class="prod-pill pill-rose">🌸 Mahakunir – Cantik Alami</div>
+    <div class="prod-pill pill-green"><Icon name="leaf" emoji="🍃" size={16} /> Ko Gan Ti – Anti Kanker</div>
+    <div class="prod-pill pill-blue"><Icon name="heart" emoji="💙" size={16} /> Nirlawa – Lambung Sehat</div>
+    <div class="prod-pill pill-rose"><Icon name="flower" emoji="🌸" size={16} /> Mahakunir – Cantik Alami</div>
   </div>
 
   <div class="hero-cta-wrap">
@@ -46,28 +48,28 @@ const {
 
   <div class="trust-row">
     <div class="trust-item">
-      <div class="trust-icon">✅</div>
+      <div class="trust-icon"><Icon name="check-circle" emoji="✅" size={20} /></div>
       <div>
         <strong>HALAL</strong><br />
         Tersertifikasi
       </div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon">🌿</div>
+      <div class="trust-icon"><Icon name="leaf" emoji="🌿" size={20} /></div>
       <div>
         <strong>100% Alami</strong><br />
         Tanpa Pengawet
       </div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon">🔬</div>
+      <div class="trust-icon"><Icon name="microscope" emoji="🔬" size={20} /></div>
       <div>
         <strong>Teruji Klinis</strong><br />
         BPOM Terdaftar
       </div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon">🚚</div>
+      <div class="trust-icon"><Icon name="truck" emoji="🚚" size={20} /></div>
       <div>
         <strong>Kirim Cepat</strong><br />
         Seluruh Indonesia

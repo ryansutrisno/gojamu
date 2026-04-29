@@ -1,4 +1,6 @@
 ---
+import Icon from '../shared/Icon.astro';
+
 interface WhyItem {
   number: number;
   title: string;
@@ -33,10 +35,10 @@ const whyItems: WhyItem[] = [
   <div class="keunggulan-inner">
     <div class="keunggulan-visual reveal">
       <div class="keung-circle">
-        🌿
-        <div class="keung-orbit orbit-1">🔬</div>
-        <div class="keung-orbit orbit-2">☽</div>
-        <div class="keung-orbit orbit-3">🌾</div>
+        <Icon name="leaf" emoji="🌿" size={112} />
+        <div class="keung-orbit orbit-1"><Icon name="microscope" emoji="🔬" size={26} /></div>
+        <div class="keung-orbit orbit-2"><Icon name="crescent-moon" emoji="☽" size={26} /></div>
+        <div class="keung-orbit orbit-3"><Icon name="wheat" emoji="🌾" size={26} /></div>
       </div>
     </div>
     <div class="reveal" style="transition-delay:.15s">
@@ -97,7 +99,6 @@ const whyItems: WhyItem[] = [
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 7rem;
     position: relative;
     box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
     animation: pulse-soft 4s ease-in-out infinite;
@@ -123,7 +124,6 @@ const whyItems: WhyItem[] = [
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
   }
   .orbit-1 {
     top: -10px;
