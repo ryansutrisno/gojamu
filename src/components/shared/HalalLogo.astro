@@ -1,0 +1,31 @@
+---
+// Halal Indonesia Logo Component
+// Uses official Halal Indonesia SVG from Wikimedia Commons
+// https://commons.wikimedia.org/wiki/File:Halal_Indonesia.svg
+import HalalLogoSVG from '../../assets/halal-logo.svg';
+
+interface Props {
+  size?: number;
+}
+
+const { size = 16 } = Astro.props;
+---
+
+<img 
+  src={HalalLogoSVG.src} 
+  alt="Halal Indonesia" 
+  class="halal-logo"
+  width={size}
+  height={size * 1.78}
+  loading="lazy"
+/>
+
+<style>
+  .halal-logo {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .halal-logo svg {
+    display: block;
+  }
+</style>
