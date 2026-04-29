@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoJamu – Herbal Alami untuk Hidup Sehat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Palet dari produk GoJamu */
+  --forest:    #1a3d2b;   /* hijau tua kemasan Ko Gan Ti */
+  --herb:      #2d6a4f;   /* hijau medium daun */
+  --moss:      #52b788;   /* hijau segar aksen */
+  --gold:      #c9a84c;   /* gold logo GoJamu */
+  --gold-lt:   #e8c97a;   /* gold terang highlight */
+  --sky:       #3a86c8;   /* biru Nirlawa */
+  --sky-lt:    #d0e8f8;   /* biru muda latar */
+  --rose:      #e8a0b0;   /* pink Mahakunir */
+  --rose-dk:   #c2617a;   /* pink gelap */
+  --cream:     #fdf8f0;   /* krem hangat latar */
+  --warm:      #f5efe3;   /* krem lebih hangat */
+  --earth:     #8b5e3c;   /* coklat tanah */
+  --text-main: #1e2d1f;   /* hijau sangat gelap untuk teks */
+  --text-muted:#5a6b5c;
+  --white:     #ffffff;
+  --leaf-tex:  rgba(82,183,136,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--cream);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ── TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(26,61,43,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── FLOATING LEAVES DECO ── */
+.leaf-deco {
+  position: absolute; pointer-events: none; opacity: 0.12;
+  font-size: 4rem; user-select: none;
+}
+
+/* ──────────────────────────────
+   NAV
+────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(253,248,240,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(26,61,43,0.08); }
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--forest); letter-spacing: .02em;
+}
+.nav-logo span { color: var(--gold); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--forest); color: var(--gold-lt);
+  font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 500;
+  padding: 9px 20px; border-radius: 50px;
+  text-decoration: none; transition: all .25s;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.nav-cta:hover { background: var(--herb); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,61,43,0.25); }
+.nav-cta svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ──────────────────────────────
+   HERO
+────────────────────────────── */
+#hero {
+  position: relative; overflow: hidden;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 120px 5% 80px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(82,183,136,0.18) 0%, transparent 70%),
+    linear-gradient(170deg, #f0f7f2 0%, var(--cream) 55%, #fdf3e3 100%);
+  text-align: center;
+}
+
+/* Animated bokeh circles */
+#hero::before {
+  content: '';
+  position: absolute; width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+  top: -100px; left: -150px; animation: drift 12s ease-in-out infinite alternate;
+}
+#hero::after {
+  content: '';
+  position: absolute; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+  bottom: -80px; right: -80px; animation: drift 15s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px, 20px) scale(1.1); } }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--herb);
+  background: rgba(82,183,136,0.12); border: 1px solid rgba(82,183,136,0.3);
+  padding: 6px 16px; border-radius: 50px; margin-bottom: 28px;
+  animation: fadeUp .8s ease both;
+}
+.hero-badge::before { content: '🌿'; font-size: .9rem; }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700; line-height: 1.15;
+  color: var(--forest);
+  margin-bottom: 12px;
+  animation: fadeUp .8s .15s ease both;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-muted); line-height: 1.7;
+  max-width: 560px; margin: 0 auto 36px;
+  animation: fadeUp .8s .25s ease both;
+}
+
+/* Produk pills hero */
+.hero-products {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  margin-bottom: 44px;
+  animation: fadeUp .8s .35s ease both;
+}
+.prod-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 50px;
+  font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 500;
+  border: 1.5px solid; cursor: default; transition: transform .2s;
+}
+.prod-pill:hover { transform: translateY(-2px); }
+.pill-green { background: rgba(26,61,43,0.06); border-color: var(--herb); color: var(--forest); }
+.pill-blue  { background: rgba(58,134,200,0.07); border-color: var(--sky); color: #1b4e8a; }
+.pill-rose  { background: rgba(232,160,176,0.15); border-color: var(--rose-dk); color: #8b3a52; }
+
+.hero-cta-wrap {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp .8s .45s ease both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 32px; border-radius: 50px;
+  font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 500;
+  text-decoration: none; transition: all .25s; cursor: pointer; border: none;
+}
+.btn-wa {
+  background: #25D366; color: #fff;
+  box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+}
+.btn-wa:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,0.45); }
+.btn-outline {
+  background: transparent; color: var(--forest);
+  border: 1.5px solid var(--herb);
+  font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 500;
+  padding: 14px 28px; border-radius: 50px; text-decoration: none; transition: all .25s;
+}
+.btn-outline:hover { background: var(--forest); color: var(--cream); }
+
+/* Trust badges hero */
+.trust-row {
+  margin-top: 52px; display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp .8s .55s ease both;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--text-muted);
+}
+.trust-item strong { color: var(--text-main); }
+.trust-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(82,183,136,0.15); display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+
+/* ──────────────────────────────
+   SECTION COMMON
+────────────────────────────── */
+section { position: relative; overflow: hidden; }
+.section-label {
+  font-family: 'Inter', sans-serif; font-size: .75rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 14px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-desc {
+  font-size: 1rem; color: var(--text-muted); line-height: 1.75; max-width: 520px;
+}
+.divider-leaf {
+  text-align: center; margin: 12px 0; color: var(--moss); font-size: 1.2rem; letter-spacing: 8px;
+}
+
+/* reveal on scroll */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ──────────────────────────────
+   MASALAH (Pain Point)
+────────────────────────────── */
+#masalah {
+  padding: 88px 5%;
+  background: var(--forest);
+  color: var(--cream);
+}
+#masalah .section-label { color: var(--gold-lt); }
+#masalah .section-title { color: var(--cream); }
+#masalah .section-desc { color: rgba(253,248,240,0.7); max-width: 100%; }
+
+.pain-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px; margin-top: 48px;
+}
+.pain-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px; padding: 28px 24px;
+  transition: background .3s, transform .3s;
+}
+.pain-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+.pain-icon { font-size: 2rem; margin-bottom: 14px; }
+.pain-title {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem;
+  color: var(--gold-lt); margin-bottom: 8px;
+}
+.pain-desc { font-family: 'Inter', sans-serif; font-size: .87rem; color: rgba(253,248,240,0.65); line-height: 1.65; }
+
+/* ──────────────────────────────
+   PRODUK CARDS
+────────────────────────────── */
+#produk {
+  padding: 96px 5%;
+  background: var(--warm);
+}
+.produk-header { text-align: center; margin-bottom: 64px; }
+.produk-header .section-desc { margin: 0 auto; }
+
+.produk-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px; max-width: 1100px; margin: 0 auto;
+}
+
+.produk-card {
+  border-radius: 24px; overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 4px 24px rgba(26,61,43,0.08);
+  transition: transform .3s, box-shadow .3s;
+  display: flex; flex-direction: column;
+}
+.produk-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,61,43,0.14); }
+
+/* Warna aksen per produk */
+.card-koganti  { --card-accent: var(--herb); --card-accent-lt: #e0f2ea; --card-text: var(--forest); }
+.card-nirlawa  { --card-accent: var(--sky);  --card-accent-lt: var(--sky-lt); --card-text: #1a3a6b; }
+.card-mahakunir{ --card-accent: var(--rose-dk); --card-accent-lt: #fde8ee; --card-text: #7a2b42; }
+
+.card-img-wrap {
+  position: relative; height: 220px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.card-koganti  .card-img-wrap { background: linear-gradient(135deg, #1a3d2b 0%, #2d6a4f 100%); }
+.card-nirlawa  .card-img-wrap { background: linear-gradient(135deg, #d0e8f8 0%, #9ecfed 100%); }
+.card-mahakunir .card-img-wrap { background: linear-gradient(135deg, #fde8ee 0%, #f5c6d6 100%); }
+
+.card-emoji { font-size: 5rem; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15)); }
+
+.card-badge-new {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--gold); color: var(--forest);
+  font-family: 'Inter', sans-serif; font-size: .7rem; font-weight: 700;
+  padding: 4px 12px; border-radius: 50px; letter-spacing: .05em;
+}
+.card-badge-halal {
+  position: absolute; top: 14px; right: 14px;
+  background: rgba(255,255,255,0.9); color: var(--forest);
+  font-family: 'Inter', sans-serif; font-size: .7rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 50px;
+  display: flex; align-items: center; gap: 4px;
+}
+
+.card-body { padding: 28px 24px; flex: 1; display: flex; flex-direction: column; }
+
+.card-tag {
+  display: inline-block; font-family: 'Inter', sans-serif;
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--card-text); background: var(--card-accent-lt);
+  padding: 4px 12px; border-radius: 50px; margin-bottom: 12px;
+}
+.card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;
+}
+.card-sub {
+  font-family: 'Inter', sans-serif; font-size: .82rem;
+  color: var(--text-muted); margin-bottom: 16px;
+}
+.card-claim {
+  font-size: .95rem; color: var(--text-main); line-height: 1.65;
+  margin-bottom: 20px; font-style: italic;
+  padding-left: 14px; border-left: 3px solid var(--card-accent);
+}
+.card-benefits { list-style: none; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; }
+.card-benefits li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: 'Inter', sans-serif; font-size: .85rem; color: var(--text-muted); line-height: 1.5;
+}
+.benefit-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--card-accent-lt); color: var(--card-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; flex-shrink: 0; margin-top: 1px;
+}
+.card-cta {
+  margin-top: auto;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 20px; border-radius: 50px;
+  font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600;
+  text-decoration: none; transition: all .25s;
+  background: var(--card-accent); color: var(--white);
+}
+.card-cta:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+/* ──────────────────────────────
+   KEUNGGULAN / WHY
+────────────────────────────── */
+#keunggulan {
+  padding: 96px 5%;
+  background: var(--cream);
+}
+.keunggulan-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+@media (max-width: 760px) { .keunggulan-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+.keunggulan-visual {
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.keung-circle {
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e0f2ea, #a8d8bf);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 7rem; position: relative;
+  box-shadow: 0 20px 60px rgba(45,106,79,0.2);
+  animation: pulse-soft 4s ease-in-out infinite;
+}
+@keyframes pulse-soft {
+  0%,100% { transform: scale(1); box-shadow: 0 20px 60px rgba(45,106,79,0.2); }
+  50% { transform: scale(1.03); box-shadow: 0 28px 70px rgba(45,106,79,0.3); }
+}
+.keung-orbit {
+  position: absolute; width: 64px; height: 64px; border-radius: 50%;
+  background: var(--white); box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+}
+.orbit-1 { top: -10px; right: 10px; }
+.orbit-2 { bottom: 20px; left: -10px; }
+.orbit-3 { top: 40%; right: -20px; }
+
+.why-list { display: flex; flex-direction: column; gap: 20px; }
+.why-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px; border-radius: 16px;
+  background: var(--warm);
+  border: 1px solid rgba(82,183,136,0.15);
+  transition: border-color .3s, transform .3s;
+}
+.why-item:hover { border-color: var(--moss); transform: translateX(4px); }
+.why-num {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: var(--forest); color: var(--gold-lt);
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.why-text-title {
+  font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--text-main); margin-bottom: 4px;
+}
+.why-text-desc {
+  font-family: 'Inter', sans-serif; font-size: .83rem; color: var(--text-muted); line-height: 1.6;
+}
+
+/* ──────────────────────────────
+   TESTIMONI
+────────────────────────────── */
+#testimoni {
+  padding: 96px 5%;
+  background: linear-gradient(160deg, #f5f0e8 0%, #edf5f0 100%);
+}
+.testimoni-header { text-align: center; margin-bottom: 56px; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px; max-width: 1000px; margin: 0 auto;
+}
+.testi-card {
+  background: var(--white); border-radius: 20px; padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(26,61,43,0.07);
+  border: 1px solid rgba(201,168,76,0.15);
+  position: relative; transition: transform .3s;
+}
+.testi-card:hover { transform: translateY(-4px); }
+.testi-quote {
+  font-size: 2.5rem; color: var(--gold-lt); line-height: 1;
+  font-family: 'Playfair Display', serif; margin-bottom: 8px;
+}
+.testi-text {
+  font-size: .93rem; color: var(--text-muted); line-height: 1.75;
+  margin-bottom: 20px; font-style: italic;
+}
+.testi-footer { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.av-green { background: #e0f2ea; }
+.av-blue  { background: #d0e8f8; }
+.av-pink  { background: #fde8ee; }
+.testi-name {
+  font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600; color: var(--text-main);
+}
+.testi-loc { font-family: 'Inter', sans-serif; font-size: .77rem; color: var(--text-muted); }
+.testi-stars { color: var(--gold); font-size: .85rem; margin-bottom: 4px; }
+.testi-product-badge {
+  position: absolute; top: 18px; right: 18px;
+  font-family: 'Inter', sans-serif; font-size: .68rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 50px;
+}
+.badge-g { background: #e0f2ea; color: var(--forest); }
+.badge-b { background: var(--sky-lt); color: #1a3a6b; }
+.badge-p { background: #fde8ee; color: #7a2b42; }
+
+/* ──────────────────────────────
+   CTA SECTION
+────────────────────────────── */
+#cta {
+  padding: 96px 5%;
+  background: var(--forest);
+  text-align: center; position: relative; overflow: hidden;
+}
+#cta::before {
+  content: '';
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  top: -150px; right: -100px;
+}
+#cta::after {
+  content: '';
+  position: absolute; width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+  bottom: -80px; left: -60px;
+}
+.cta-eyebrow {
+  font-family: 'Inter', sans-serif; font-size: .75rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-lt); margin-bottom: 20px; position: relative; z-index: 1;
+}
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700;
+  color: var(--white); line-height: 1.2; margin-bottom: 16px;
+  position: relative; z-index: 1;
+}
+.cta-title em { font-style: italic; color: var(--gold-lt); }
+.cta-desc {
+  font-family: 'Inter', sans-serif; font-size: .95rem;
+  color: rgba(255,255,255,0.65); line-height: 1.7;
+  max-width: 480px; margin: 0 auto 40px;
+  position: relative; z-index: 1;
+}
+.cta-buttons {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 1;
+}
+.btn-wa-lg {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 36px; border-radius: 50px;
+  background: #25D366; color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600;
+  text-decoration: none; transition: all .25s;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+}
+.btn-wa-lg:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(37,211,102,0.5); }
+.btn-wa-lg svg { width: 22px; height: 22px; fill: currentColor; }
+
+.wa-hint {
+  margin-top: 20px; font-family: 'Inter', sans-serif;
+  font-size: .78rem; color: rgba(255,255,255,0.4);
+  position: relative; z-index: 1;
+}
+
+/* ──────────────────────────────
+   FAQ
+────────────────────────────── */
+#faq {
+  padding: 88px 5%;
+  background: var(--warm);
+}
+.faq-inner { max-width: 720px; margin: 0 auto; }
+.faq-header { text-align: center; margin-bottom: 48px; }
+.faq-item {
+  border-bottom: 1px solid rgba(82,183,136,0.2);
+  padding: 20px 0;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; gap: 16px;
+  font-family: 'Lora', serif; font-size: 1rem; font-weight: 500;
+  color: var(--text-main);
+}
+.faq-q:hover { color: var(--herb); }
+.faq-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(82,183,136,0.12); color: var(--herb);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0; transition: transform .3s;
+}
+.faq-a {
+  font-family: 'Inter', sans-serif; font-size: .88rem;
+  color: var(--text-muted); line-height: 1.75;
+  max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--herb); color: var(--white); }
+
+/* ──────────────────────────────
+   FOOTER
+────────────────────────────── */
+footer {
+  background: var(--text-main); color: rgba(255,255,255,0.6);
+  padding: 40px 5%;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif; font-size: 1.4rem;
+  font-weight: 700; color: var(--white);
+}
+.footer-brand span { color: var(--gold-lt); }
+.footer-text { font-family: 'Inter', sans-serif; font-size: .8rem; }
+.footer-copy { font-family: 'Inter', sans-serif; font-size: .78rem; }
+
+/* ──────────────────────────────
+   STICKY WA BUTTON
+────────────────────────────── */
+.sticky-wa {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: #25D366; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+  text-decoration: none; transition: transform .2s, box-shadow .2s;
+  animation: wa-bounce 2.5s ease-in-out infinite;
+}
+.sticky-wa:hover { transform: scale(1.1); box-shadow: 0 10px 36px rgba(37,211,102,0.6); }
+.sticky-wa svg { width: 30px; height: 30px; fill: #fff; }
+@keyframes wa-bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.sticky-wa-label {
+  position: fixed; bottom: 36px; right: 90px; z-index: 999;
+  background: var(--forest); color: var(--cream);
+  font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 500;
+  padding: 6px 14px; border-radius: 50px;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transform: translateX(6px);
+  transition: opacity .2s, transform .2s;
+}
+.sticky-wa:hover + .sticky-wa-label { opacity: 1; transform: translateX(0); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .trust-row { gap: 16px; }
+  .trust-item { font-size: .75rem; }
+  .keung-circle { width: 220px; height: 220px; font-size: 5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Go<span>Jamu</span></div>
+  <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+mau+tanya+produk+herbal+Anda" class="nav-cta" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+    Tanya Sekarang
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">100% Herbal Alami · Tanpa Bahan Kimia</div>
+  <h1 class="hero-title">Tubuh Sehat Dimulai dari<br><em>Alam yang Terjaga</em></h1>
+  <p class="hero-sub">Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara — diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari.</p>
+
+  <div class="hero-products">
+    <div class="prod-pill pill-green">🍃 Ko Gan Ti – Anti Kanker</div>
+    <div class="prod-pill pill-blue">💙 Nirlawa – Lambung Sehat</div>
+    <div class="prod-pill pill-rose">🌸 Mahakunir – Cantik Alami</div>
+  </div>
+
+  <div class="hero-cta-wrap">
+    <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+ingin+tahu+lebih+lanjut+tentang+produk+herbal+Anda" class="btn-primary btn-wa" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+      Chat WhatsApp Sekarang
+    </a>
+    <a href="#produk" class="btn-outline">Lihat Produk ↓</a>
+  </div>
+
+  <div class="trust-row">
+    <div class="trust-item"><div class="trust-icon">✅</div><div><strong>HALAL</strong><br>Tersertifikasi</div></div>
+    <div class="trust-item"><div class="trust-icon">🌿</div><div><strong>100% Alami</strong><br>Tanpa Pengawet</div></div>
+    <div class="trust-item"><div class="trust-icon">🔬</div><div><strong>Teruji Klinis</strong><br>BPOM Terdaftar</div></div>
+    <div class="trust-item"><div class="trust-icon">🚚</div><div><strong>Kirim Cepat</strong><br>Seluruh Indonesia</div></div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="masalah">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <p class="section-label">Apakah Anda Merasakannya?</p>
+      <h2 class="section-title">Tubuh Anda Butuh<br>Perhatian Lebih</h2>
+      <p class="section-desc">Gaya hidup modern membuat tubuh kita rentan terhadap berbagai gangguan kesehatan. GoJamu hadir sebagai solusi alami dari bumi Nusantara.</p>
+    </div>
+    <div class="pain-grid reveal" style="transition-delay:.15s">
+      <div class="pain-card">
+        <div class="pain-icon">😓</div>
+        <div class="pain-title">Mudah Lelah & Kurang Bertenaga</div>
+        <div class="pain-desc">Tubuh terasa berat, semangat menurun, produktivitas terganggu sejak pagi hari.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🤢</div>
+        <div class="pain-title">Lambung Sering Tidak Nyaman</div>
+        <div class="pain-desc">Perut kembung, mual, atau nyeri lambung yang mengganggu aktivitas sehari-hari.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">😔</div>
+        <div class="pain-title">Kulit Kusam & Tidak Glowing</div>
+        <div class="pain-desc">Kulit terlihat lelah, tidak cerah, dan tidak memancarkan kecantikan alami Anda.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🛡️</div>
+        <div class="pain-title">Imun Lemah, Mudah Sakit</div>
+        <div class="pain-desc">Daya tahan tubuh menurun, rentan terhadap virus dan bakteri di sekitar kita.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+  <div class="produk-header reveal">
+    <p class="section-label">Solusi Herbal Kami</p>
+    <h2 class="section-title">Pilih Produk<br>yang Tepat untuk <em>Anda</em></h2>
+    <div class="divider-leaf">🌿 ✦ 🌿</div>
+    <p class="section-desc" style="margin:0 auto;">Setiap produk GoJamu diformulasikan khusus dari bahan herbal pilihan, tanpa pengawet buatan, aman dikonsumsi setiap hari.</p>
+  </div>
+
+  <div class="produk-grid">
+
+    <!-- Ko Gan Ti -->
+    <div class="produk-card card-koganti reveal" style="transition-delay:.1s">
+      <div class="card-img-wrap">
+        <div class="card-emoji">🍃</div>
+        <div class="card-badge-new">BARU!</div>
+        <div class="card-badge-halal">☽ HALAL</div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Anti Kanker · Antioksidan</span>
+        <div class="card-name">Ko Gan Ti</div>
+        <div class="card-sub">Teh Celup Balakacida — 10 Tea Bags</div>
+        <p class="card-claim">"Perlindungan alami dari dalam, melawan radikal bebas dan sel kanker setiap hari."</p>
+        <ul class="card-benefits">
+          <li><span class="benefit-dot">✓</span>Membantu melawan perkembangan sel kanker</li>
+          <li><span class="benefit-dot">✓</span>Antioksidan tinggi dari Daun Balakacida pilihan</li>
+          <li><span class="benefit-dot">✓</span>Meningkatkan sistem imun tubuh</li>
+          <li><span class="benefit-dot">✓</span>Detoksifikasi racun dalam tubuh secara alami</li>
+        </ul>
+        <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+tertarik+dengan+Ko+Gan+Ti+Teh+Celup+Balakacida.+Boleh+info+harga+dan+cara+order?" class="card-cta" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+          Tanya Harga via WA
+        </a>
+      </div>
+    </div>
+
+    <!-- Nirlawa -->
+    <div class="produk-card card-nirlawa reveal" style="transition-delay:.2s">
+      <div class="card-img-wrap">
+        <div class="card-emoji">💙</div>
+        <div class="card-badge-new">BARU!</div>
+        <div class="card-badge-halal">☽ HALAL</div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Kesehatan Lambung</span>
+        <div class="card-name">Nirlawa</div>
+        <div class="card-sub">Kunir & Temulawak — 100g</div>
+        <p class="card-claim">"Sehatkan lambungmu secara alami — solusi terpercaya untuk pencernaan optimal setiap hari."</p>
+        <ul class="card-benefits">
+          <li><span class="benefit-dot">✓</span>Bantu jaga kesehatan dan fungsi lambung</li>
+          <li><span class="benefit-dot">✓</span>Dukung daya tahan tubuh tetap optimal</li>
+          <li><span class="benefit-dot">✓</span>100% bahan alami tanpa pengawet buatan</li>
+          <li><span class="benefit-dot">✓</span>Praktis, menyegarkan, aman untuk keluarga</li>
+        </ul>
+        <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+tertarik+dengan+Nirlawa+Kunir+%26+Temulawak.+Boleh+info+harga+dan+cara+order?" class="card-cta" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+          Tanya Harga via WA
+        </a>
+      </div>
+    </div>
+
+    <!-- Mahakunir -->
+    <div class="produk-card card-mahakunir reveal" style="transition-delay:.3s">
+      <div class="card-img-wrap">
+        <div class="card-emoji">🌸</div>
+        <div class="card-badge-new">BARU!</div>
+        <div class="card-badge-halal">☽ HALAL</div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Kecantikan · Perempuan</span>
+        <div class="card-name">Mahakunir</div>
+        <div class="card-sub">Original Kunir — 100g</div>
+        <p class="card-claim">"Cantik alami dari dalam — kulit glowing, tubuh sehat, kepercayaan diri memancar setiap hari."</p>
+        <ul class="card-benefits">
+          <li><span class="benefit-dot">✓</span>Kulit lebih sehat, cerah, dan glowing alami</li>
+          <li><span class="benefit-dot">✓</span>Menjaga daya tahan tubuh tetap fit</li>
+          <li><span class="benefit-dot">✓</span>Baik untuk kesehatan pencernaan</li>
+          <li><span class="benefit-dot">✓</span>Bantu jaga berat badan ideal</li>
+        </ul>
+        <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+tertarik+dengan+Mahakunir+Original+Kunir.+Boleh+info+harga+dan+cara+order?" class="card-cta" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+          Tanya Harga via WA
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan">
+  <div class="keunggulan-inner">
+    <div class="keunggulan-visual reveal">
+      <div class="keung-circle">🌿
+        <div class="keung-orbit orbit-1">🔬</div>
+        <div class="keung-orbit orbit-2">☽</div>
+        <div class="keung-orbit orbit-3">🌾</div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <p class="section-label">Mengapa GoJamu?</p>
+      <h2 class="section-title">Dibuat dengan<br><em>Standar Terbaik</em></h2>
+      <p class="section-desc" style="margin-bottom:32px;">Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga dengan ilmu dan hati.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">1</div>
+          <div>
+            <div class="why-text-title">Bahan Herbal 100% Pilihan</div>
+            <div class="why-text-desc">Setiap bahan dipilih secara ketat dari sumber terpercaya di seluruh Nusantara, tanpa campuran bahan kimia berbahaya.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">2</div>
+          <div>
+            <div class="why-text-title">Tersertifikasi HALAL & BPOM</div>
+            <div class="why-text-desc">Proses produksi terstandar dan terdaftar resmi, sehingga aman untuk seluruh anggota keluarga Anda.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">3</div>
+          <div>
+            <div class="why-text-title">Formulasi Ilmiah Modern</div>
+            <div class="why-text-desc">Kearifan lokal herbal Nusantara dikombinasikan dengan teknologi pengolahan modern untuk hasil yang optimal.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">4</div>
+          <div>
+            <div class="why-text-title">Aman Dikonsumsi Setiap Hari</div>
+            <div class="why-text-desc">Tanpa pengawet buatan, tanpa efek samping berbahaya — cocok untuk konsumsi jangka panjang seluruh keluarga.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section id="testimoni">
+  <div class="testimoni-header reveal">
+    <p class="section-label">Kata Mereka</p>
+    <h2 class="section-title">Ribuan Keluarga Sudah<br><em>Merasakannya</em></h2>
+    <div class="divider-leaf">🌿 ✦ 🌿</div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal" style="transition-delay:.1s">
+      <span class="testi-product-badge badge-g">Ko Gan Ti</span>
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Sudah 3 bulan rutin minum Ko Gan Ti. Badan terasa lebih ringan, hasil cek kesehatan membaik. Terima kasih GoJamu, produk ini benar-benar membantu keluarga kami.</p>
+      <div class="testi-footer">
+        <div class="testi-avatar av-green">👨</div>
+        <div><div class="testi-name">Bapak Hendra S.</div><div class="testi-loc">Surabaya, Jawa Timur</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal" style="transition-delay:.2s">
+      <span class="testi-product-badge badge-b">Nirlawa</span>
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Lambung saya sering bermasalah bertahun-tahun. Sejak pakai Nirlawa GoJamu, perut lebih nyaman, tidak kembung lagi. Rasanya pun enak, jadi semangat minum rutin.</p>
+      <div class="testi-footer">
+        <div class="testi-avatar av-blue">👩</div>
+        <div><div class="testi-name">Ibu Ratna W.</div><div class="testi-loc">Bandung, Jawa Barat</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal" style="transition-delay:.3s">
+      <span class="testi-product-badge badge-p">Mahakunir</span>
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Kulit saya terasa lebih cerah dan glowing setelah sebulan minum Mahakunir. Alami, aman, tidak ada efek samping. Cocok banget buat wanita yang ingin cantik dari dalam!</p>
+      <div class="testi-footer">
+        <div class="testi-avatar av-pink">👩</div>
+        <div><div class="testi-name">Sari Dewi A.</div><div class="testi-loc">Jakarta Selatan</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA UTAMA -->
+<section id="cta">
+  <p class="cta-eyebrow reveal">Mulai Perjalanan Sehat Anda</p>
+  <h2 class="cta-title reveal">Siap Hidup Lebih Sehat<br>dengan <em>Herbal Alami?</em></h2>
+  <p class="cta-desc reveal">Konsultasikan kebutuhan kesehatan Anda secara gratis bersama tim GoJamu. Kami siap membantu Anda memilih produk yang paling tepat.</p>
+  <div class="cta-buttons reveal">
+    <a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu!+Saya+mau+konsultasi+produk+herbal+yang+cocok+untuk+saya+🌿" class="btn-wa-lg" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+      Konsultasi GRATIS via WhatsApp
+    </a>
+  </div>
+  <p class="wa-hint reveal">💬 Respon cepat · Tidak ada paksaan beli · Konsultasi ramah & personal</p>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <p class="section-label">Pertanyaan Umum</p>
+      <h2 class="section-title">Ada yang Ingin<br><em>Ditanyakan?</em></h2>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Apakah produk GoJamu aman dikonsumsi jangka panjang?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di BPOM. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.</div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.1s">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Berapa lama efek produk mulai terasa?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Umumnya efek mulai terasa dalam 2–4 minggu konsumsi rutin. Namun hasilnya bisa berbeda tergantung kondisi tubuh masing-masing. Untuk hasil optimal, disarankan konsumsi secara konsisten setiap hari.</div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.15s">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Apakah GoJamu bisa dikonsumsi bersamaan dengan obat dokter?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Secara umum aman, namun kami sangat menyarankan untuk berkonsultasi terlebih dahulu dengan dokter Anda, terutama jika sedang dalam pengobatan aktif. Tim kami juga siap membantu menjawab pertanyaan seputar ini via WhatsApp.</div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.2s">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Bagaimana cara memesan dan metode pengiriman?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Pemesanan dilakukan via WhatsApp. Kami melayani pengiriman ke seluruh Indonesia dengan berbagai jasa ekspedisi. Chat kami sekarang untuk konfirmasi stok, harga, dan estimasi waktu pengiriman ke kota Anda.</div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.25s">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Apakah ada garansi atau jaminan kepuasan?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">GoJamu berkomitmen penuh terhadap kualitas produk. Jika Anda memiliki keluhan terkait produk yang diterima, hubungi kami via WhatsApp dan kami akan memberikan solusi terbaik untuk Anda.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Go<span>Jamu</span></div>
+  <div class="footer-text">Herbal Alami · Nusantara Sehat · Semua Kalangan</div>
+  <div class="footer-copy">© 2024 GoJamu. Semua Hak Dilindungi.</div>
+</footer>
+
+<!-- STICKY WA -->
+<a href="https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu!+Saya+mau+tanya+tentang+produk+herbal+Anda+🌿" class="sticky-wa" target="_blank" id="stickyWa">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"/></svg>
+</a>
+<div class="sticky-wa-label">Chat WhatsApp</div>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
