@@ -1,3 +1,9 @@
+// Product images
+import KoGanTI from '../assets/KoGanTI.webp';
+import Nirlawa from '../assets/Nirlawa.webp';
+import Mahakunir from '../assets/Mahakunir.webp';
+import type { ImageMetadata } from 'astro';
+
 export interface Product {
   id: string;
   name: string;
@@ -5,6 +11,7 @@ export interface Product {
   tag: string;
   emoji: string;
   icon: string;
+  image: ImageMetadata;
   cardClass: 'card-koganti' | 'card-nirlawa' | 'card-mahakunir';
   claim: string;
   benefits: string[];
@@ -19,6 +26,7 @@ export const products: Product[] = [
     tag: 'Anti Kanker · Antioksidan',
     emoji: '🍃',
     icon: 'leaf',
+    image: KoGanTI,
     cardClass: 'card-koganti',
     claim: '"Perlindungan alami dari dalam, melawan radikal bebas dan sel kanker setiap hari."',
     benefits: [
@@ -37,6 +45,7 @@ export const products: Product[] = [
     tag: 'Kesehatan Lambung',
     emoji: '💙',
     icon: 'heart',
+    image: Nirlawa,
     cardClass: 'card-nirlawa',
     claim: '"Sehatkan lambungmu secara alami — solusi terpercaya untuk pencernaan optimal setiap hari."',
     benefits: [
@@ -55,6 +64,7 @@ export const products: Product[] = [
     tag: 'Kecantikan · Perempuan',
     emoji: '🌸',
     icon: 'flower',
+    image: Mahakunir,
     cardClass: 'card-mahakunir',
     claim: '"Cantik alami dari dalam — kulit glowing, tubuh sehat, kepercayaan diri memancar setiap hari."',
     benefits: [
