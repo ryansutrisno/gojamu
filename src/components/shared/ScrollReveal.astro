@@ -1,0 +1,29 @@
+---
+// ScrollReveal - IntersectionObserver-based scroll reveal animation
+// This component initializes scroll reveal animations for all .reveal elements
+---
+
+<script>
+  // Initialize IntersectionObserver for scroll reveal
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  // Observe all elements with the reveal class
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }
+  });
+</script>

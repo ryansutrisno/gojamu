@@ -1,0 +1,175 @@
+/* ── GoJamu Global Styles ── */
+
+@layer base {
+  :root {
+    /* Palet dari produk GoJamu */
+    --forest: #1a3d2b;   /* hijau tua kemasan Ko Gan Ti */
+    --herb: #2d6a4f;   /* hijau medium daun */
+    --moss: #52b788;   /* hijau segar aksen */
+    --gold: #c9a84c;   /* gold logo GoJamu */
+    --gold-lt: #e8c97a;   /* gold terang highlight */
+    --sky: #3a86c8;   /* biru Nirlawa */
+    --sky-lt: #d0e8f8;   /* biru muda latar */
+    --rose: #e8a0b0;   /* pink Mahakunir */
+    --rose-dk: #c2617a;   /* pink gelap */
+    --cream: #fdf8f0;   /* krem hangat latar */
+    --warm: #f5efe3;   /* krem lebih hangat */
+    --earth: #8b5e3c;   /* coklat tanah */
+    --text-main: #1e2d1f;   /* hijau sangat gelap untuk teks */
+    --text-muted: #5a6b5c;
+    --white: #ffffff;
+    --leaf-tex: rgba(82, 183, 136, 0.08);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--cream);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+
+  /* ── TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(ellipse at 20% 20%, rgba(26, 61, 43, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── FLOATING LEAVES DECO ── */
+  .leaf-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.12;
+    font-size: 4rem;
+    user-select: none;
+  }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(30px, 20px) scale(1.1);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 28px 70px rgba(45, 106, 79, 0.3);
+  }
+}
+
+@keyframes wa-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ── SECTION COMMON ── */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.section-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+.divider-leaf {
+  text-align: center;
+  margin: 12px 0;
+  color: var(--moss);
+  font-size: 1.2rem;
+  letter-spacing: 8px;
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .trust-row {
+    gap: 16px;
+  }
+  .trust-item {
+    font-size: 0.75rem;
+  }
+  .keung-circle {
+    width: 220px;
+    height: 220px;
+    font-size: 5rem;
+  }
+}

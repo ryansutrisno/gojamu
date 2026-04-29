@@ -1,0 +1,28 @@
+{
+  "name": "gojamu",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "GoJamu - Herbal Alami untuk Hidup Sehat",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryansutrisno/gojamu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryansutrisno/gojamu/issues"
+  },
+  "homepage": "https://github.com/ryansutrisno/gojamu#readme",
+  "dependencies": {
+    "@astrojs/vercel": "^8.2.11",
+    "astro": "^5.18.1"
+  }
+}

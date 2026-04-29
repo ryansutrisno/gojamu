@@ -1,0 +1,144 @@
+---
+import { testimonials, type Testimonial } from '../../data/testimonials';
+import Icon from '../shared/Icon.astro';
+---
+
+<section id="testimoni">
+  <div class="testimoni-header reveal">
+    <p class="section-label">Kata Mereka</p>
+    <h2 class="section-title">
+      Ribuan Keluarga Sudah<br />
+      <em>Merasakannya</em>
+    </h2>
+    <div class="divider-leaf">🌿 ✦ 🌿</div>
+  </div>
+  <div class="testi-grid">
+    {testimonials.map((testi, index) => (
+      <div class="testi-card reveal" style={`transition-delay:${0.1 + index * 0.1}s`}>
+        <span class={`testi-product-badge ${testi.badgeClass}`}>{testi.productBadge}</span>
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">
+          <Icon name="star" emoji="★" size={14} />
+          <Icon name="star" emoji="★" size={14} />
+          <Icon name="star" emoji="★" size={14} />
+          <Icon name="star" emoji="★" size={14} />
+          <Icon name="star" emoji="★" size={14} />
+        </div>
+        <p class="testi-text">{testi.text}</p>
+        <div class="testi-footer">
+          <div class={`testi-avatar ${testi.avatarClass}`}><Icon name={testi.avatarIcon} emoji={testi.avatarEmoji} size={24} /></div>
+          <div>
+            <div class="testi-name">{testi.name}</div>
+            <div class="testi-loc">{testi.location}</div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  #testimoni {
+    padding: 96px 5%;
+    background: linear-gradient(160deg, #f5f0e8 0%, #edf5f0 100%);
+  }
+  .testimoni-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(26, 61, 43, 0.07);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .testi-card:hover {
+    transform: translateY(-4px);
+  }
+  .testi-quote {
+    font-size: 2.5rem;
+    color: var(--gold-lt);
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 8px;
+  }
+  .testi-text {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testi-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .av-green {
+    background: #e0f2ea;
+  }
+  .av-blue {
+    background: #d0e8f8;
+  }
+  .av-pink {
+    background: #fde8ee;
+  }
+  .testi-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  .testi-loc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.77rem;
+    color: var(--text-muted);
+  }
+  .testi-stars {
+    color: var(--gold);
+    display: flex;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+  .testi-product-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 50px;
+  }
+  .badge-g {
+    background: #e0f2ea;
+    color: var(--forest);
+  }
+  .badge-b {
+    background: var(--sky-lt);
+    color: #1a3a6b;
+  }
+  .badge-p {
+    background: #fde8ee;
+    color: #7a2b42;
+  }
+</style>

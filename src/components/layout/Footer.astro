@@ -1,0 +1,51 @@
+---
+interface Props {
+  brand?: string;
+  tagline?: string;
+  year?: number;
+}
+
+const {
+  brand = 'GoJamu',
+  tagline = 'Herbal Alami · Nusantara Sehat · Semua Kalangan',
+  year = 2024,
+} = Astro.props;
+---
+
+<footer>
+  <div class="footer-brand">
+    {brand.split('Jamu')[0]}<span>Jamu</span>
+  </div>
+  <div class="footer-text">{tagline}</div>
+  <div class="footer-copy">© {year} GoJamu. Semua Hak Dilindungi.</div>
+</footer>
+
+<style>
+  footer {
+    background: var(--text-main);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 40px 5%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .footer-brand span {
+    color: var(--gold-lt);
+  }
+  .footer-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+  }
+  .footer-copy {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+  }
+</style>
