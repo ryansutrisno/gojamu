@@ -1,10 +1,12 @@
 ---
+import { buildWALink } from '../../utils/wa';
+
 interface Props {
   waLink?: string;
 }
 
 const {
-  waLink = 'https://wa.me/6281225463341?text=Halo+GoJamu,+saya+mau+tanya+produk+herbal+Anda',
+  waLink = buildWALink('Halo GoJamu, saya mau tanya produk herbal Anda'),
 } = Astro.props;
 ---
 

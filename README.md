@@ -165,14 +165,13 @@ git push origin v1.0.0
 
 ### WhatsApp Integration
 
-Update WhatsApp number di component masing-masing:
+Set nomor WhatsApp via environment variable `PUBLIC_WHATSAPP_NUMBER` di `.env` atau Vercel dashboard. Nomor ini dipakai secara otomatis di semua component (Hero, CTA, Navbar, StickyWA, ProductCards).
+
+Untuk override di component individual (opsional):
 
 ```astro
-<!-- di Navbar.astro -->
-<a href="https://wa.me/628XXXXXXXXXX" ...>
-
-<!-- di Hero.astro -->
-<a href="https://wa.me/628XXXXXXXXXX?text=..." ...>
+<Hero waLink="https://wa.me/62899999999?text=Custom+message" />
+<CTA waLink="https://wa.me/62899999999?text=Message+lain" />
 ```
 
 ### Environment Variables
