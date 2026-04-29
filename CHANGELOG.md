@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/ryansutrisno/gojamu/compare/v1.2.0...v1.2.1) (2026-04-29)
+
+### Documentation
+
+* update README with Meta Pixel tracking and add .env.example ([3580eed](https://github.com/ryansutrisno/gojamu/commit/3580eed58310fe99244cf07720873efc461a91f1))
+
 ## [1.2.0](https://github.com/ryansutrisno/gojamu/compare/v1.1.0...v1.2.0) (2026-04-29)
 
 ### Features
