@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  waLink = 'https://wa.me/628XXXXXXXXXX?text=Halo+GoJamu,+saya+ingin+tahu+lebih+lanjut+tentang+produk+herbal+Anda',
+  waLink = 'https://wa.me/6281225463341?text=Halo+GoJamu,+saya+ingin+tahu+lebih+lanjut+tentang+produk+herbal+Anda',
   learnMoreLink = '#produk',
 } = Astro.props;
 ---
@@ -87,10 +87,16 @@ const {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 120px 5% 80px;
+    padding: 140px 5% 80px;
     background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(82, 183, 136, 0.18) 0%, transparent 70%),
       linear-gradient(170deg, #f0f7f2 0%, var(--cream) 55%, #fdf3e3 100%);
     text-align: center;
+    z-index: 1;
+  }
+  @media (max-width: 600px) {
+    #hero {
+      padding-top: 120px;
+    }
   }
 
   /* Animated bokeh circles */
@@ -253,10 +259,24 @@ const {
     border-radius: 50px;
     text-decoration: none;
     transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-outline:hover {
     background: var(--forest);
     color: var(--cream);
+  }
+  @media (max-width: 600px) {
+    .btn-outline {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+    }
+    .hero-cta-wrap {
+      gap: 10px;
+    }
   }
 
   /* Trust badges hero */
