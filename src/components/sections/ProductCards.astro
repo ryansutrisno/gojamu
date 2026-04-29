@@ -1,6 +1,7 @@
 ---
 import { products, type Product } from '../../data/products';
 import Icon from '../shared/Icon.astro';
+import HalalLogo from '../shared/HalalLogo.astro';
 
 interface Props {
   waBaseLink?: string;
@@ -33,7 +34,10 @@ function getWaLink(product: Product): string {
         <div class="card-img-wrap">
           <img src={product.image.src} alt={product.name} class="card-image" loading="lazy" />
           <div class="card-badge-new">BARU!</div>
-          <div class="card-badge-halal">☽ HALAL</div>
+          <div class="card-badge-halal">
+            <HalalLogo size={14} color="var(--forest)" />
+            HALAL
+          </div>
         </div>
         <div class="card-body">
           <span class="card-tag">{product.tag}</span>
@@ -168,11 +172,11 @@ function getWaLink(product: Product): string {
     font-family: 'Inter', sans-serif;
     font-size: 0.7rem;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 4px 10px 4px 8px;
     border-radius: 50px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
   }
 
   .card-body {
