@@ -11,6 +11,7 @@ Landing page modern untuk produk herbal GoJamu yang dibangun dengan [Astro](http
 - 🌐 **Cross-device Icons** - Emoji dengan SVG fallback untuk konsistensi
 - 📊 **Data-driven** - Product & testimonial data terpisah di file data
 - 🔄 **CI/CD Ready** - GitHub workflows untuk auto release & changelog
+- 🔍 **Ad Tracking** - Meta Pixel (Facebook Pixel) integration untuk conversion tracking
 - ☁️ **Vercel Deployment** - Serverless deployment dengan Vercel adapter
 
 ## 🛠️ Tech Stack
@@ -45,7 +46,8 @@ gojamu/
 │   │   │   └── FAQ.astro
 │   │   └── shared/          # Shared components
 │   │       ├── Icon.astro   # Icon dengan SVG fallback
-│   │       └── ScrollReveal.astro
+│   │       ├── ScrollReveal.astro
+│   │       └── MetaPixel.astro  # Meta Pixel ad tracking
 │   ├── data/                # Data files
 │   │   ├── products.ts
 │   │   └── testimonials.ts
@@ -56,6 +58,7 @@ gojamu/
 │   └── pages/
 │       └── index.astro      # Main page
 ├── public/                  # Static assets
+├── .env.example             # Contoh environment variables
 ├── astro.config.mjs         # Astro config
 ├── package.json
 └── vercel.json             # Vercel config
@@ -172,6 +175,53 @@ Update WhatsApp number di component masing-masing:
 <a href="https://wa.me/628XXXXXXXXXX?text=..." ...>
 ```
 
+### Environment Variables
+
+Copy `.env.example` ke `.env` dan isi nilai sesuai kebutuhan:
+
+```bash
+# Meta Pixel (Facebook Pixel) - Ad tracking & conversion
+PUBLIC_META_PIXEL_ID=your-pixel-id-here
+```
+
+**Cara mendapatkan Pixel ID:**
+1. Buka [Meta Business Suite](https://business.facebook.com)
+2. Navigate ke **Events Manager** → **Data Sources**
+3. Create new **Web Pixel** atau pilih yang sudah ada
+4. Copy Pixel ID (angka numerik)
+
+**Tanpa Pixel ID:** Component tidak akan render — zero overhead.
+
+### Meta Pixel Tracking
+
+Meta Pixel secara otomatis melacak:
+- **PageView** — Setiap kali halaman dimuat
+
+Untuk tracking klik WhatsApp CTA atau event lainnya:
+
+```typescript
+// Di component (e.g., Hero.astro, StickyWA.astro)
+<a href="https://wa.me/..." onclick={() => {
+  // @ts-ignore
+  if (typeof window.fbq === 'function') {
+    // @ts-ignore
+    window.fbq('track', 'Contact', {
+      content_name: 'WhatsApp CTA Click',
+    });
+  }
+}}>
+  Hubungi Kami
+</a>
+```
+
+Event yang umum dipakai di Facebook Ads:
+| Event | Use Case |
+|---|---|
+| `Lead` | User submit form / kontak pertama |
+| `Contact` | Klik WhatsApp / phone call |
+| `ViewContent` | View produk / landing page |
+| `CompleteRegistration` | User selesai registrasi |
+
 ### Product Data
 
 Edit `src/data/products.ts` untuk mengubah produk:
@@ -205,7 +255,7 @@ export const testimonials: Testimonial[] = [
 
 ## 📝 License
 
-© 2024 GoJamu. Semua Hak Dilindungi.
+© 2024–2026 GoJamu. Semua Hak Dilindungi.
 
 ## 👤 Contact
 
