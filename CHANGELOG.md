@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/ryansutrisno/gojamu/compare/v1.3.0...v1.3.1) (2026-04-29)
+
+### Bug Fixes
+
+* **seo:** remove emoji from default WhatsApp message ([2460d6f](https://github.com/ryansutrisno/gojamu/commit/2460d6fe37028df14b0b313c1450adcd38f99c9a))
+
 ## [1.3.0](https://github.com/ryansutrisno/gojamu/compare/v1.2.1...v1.3.0) (2026-04-29)
 
 ### Features
