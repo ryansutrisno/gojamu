@@ -5,6 +5,8 @@ env:
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
   workflow_dispatch:
@@ -45,8 +47,14 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
-          else
+          elif [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
             echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            # Auto-generate version from branch push (main)
+            SHORT_SHA=${{ github.sha }}
+            SHORT_SHA=${SHORT_SHA:0:7}
+            TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+            echo "version=auto-${TIMESTAMP}-${SHORT_SHA}" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate changelog
@@ -73,7 +81,7 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
 
             ---
-            **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.version.outputs.version }}...main
+            **Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.version.outputs.version }}...HEAD
           draft: false
           prerelease: false
           generate_release_notes: true
