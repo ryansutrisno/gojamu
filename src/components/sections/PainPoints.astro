@@ -1,0 +1,107 @@
+---
+interface PainPoint {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+const painPoints: PainPoint[] = [
+  {
+    icon: '😓',
+    title: 'Mudah Lelah & Kurang Bertenaga',
+    desc: 'Tubuh terasa berat, semangat menurun, produktivitas terganggu sejak pagi hari.',
+  },
+  {
+    icon: '🤢',
+    title: 'Lambung Sering Tidak Nyaman',
+    desc: 'Perut kembung, mual, atau nyeri lambung yang mengganggu aktivitas sehari-hari.',
+  },
+  {
+    icon: '😔',
+    title: 'Kulit Kusam & Tidak Glowing',
+    desc: 'Kulit terlihat lelah, tidak cerah, dan tidak memancarkan kecantikan alami Anda.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Imun Lemah, Mudah Sakit',
+    desc: 'Daya tahan tubuh menurun, rentan terhadap virus dan bakteri di sekitar kita.',
+  },
+];
+---
+
+<section id="masalah">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <p class="section-label">Apakah Anda Merasakannya?</p>
+      <h2 class="section-title">
+        Tubuh Anda Butuh<br />
+        Perhatian Lebih
+      </h2>
+      <p class="section-desc">
+        Gaya hidup modern membuat tubuh kita rentan terhadap berbagai gangguan kesehatan. GoJamu hadir
+        sebagai solusi alami dari bumi Nusantara.
+      </p>
+    </div>
+    <div class="pain-grid reveal" style="transition-delay:.15s">
+      {painPoints.map((point) => (
+        <div class="pain-card">
+          <div class="pain-icon">{point.icon}</div>
+          <div class="pain-title">{point.title}</div>
+          <div class="pain-desc">{point.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #masalah {
+    padding: 88px 5%;
+    background: var(--forest);
+    color: var(--cream);
+  }
+  #masalah .section-label {
+    color: var(--gold-lt);
+  }
+  #masalah .section-title {
+    color: var(--cream);
+  }
+  #masalah .section-desc {
+    color: rgba(253, 248, 240, 0.7);
+    max-width: 100%;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .pain-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .pain-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+  }
+  .pain-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+  .pain-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold-lt);
+    margin-bottom: 8px;
+  }
+  .pain-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.87rem;
+    color: rgba(253, 248, 240, 0.65);
+    line-height: 1.65;
+  }
+</style>

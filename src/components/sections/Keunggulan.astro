@@ -1,0 +1,186 @@
+---
+interface WhyItem {
+  number: number;
+  title: string;
+  desc: string;
+}
+
+const whyItems: WhyItem[] = [
+  {
+    number: 1,
+    title: 'Bahan Herbal 100% Pilihan',
+    desc: 'Setiap bahan dipilih secara ketat dari sumber terpercaya di seluruh Nusantara, tanpa campuran bahan kimia berbahaya.',
+  },
+  {
+    number: 2,
+    title: 'Tersertifikasi HALAL & BPOM',
+    desc: 'Proses produksi terstandar dan terdaftar resmi, sehingga aman untuk seluruh anggota keluarga Anda.',
+  },
+  {
+    number: 3,
+    title: 'Formulasi Ilmiah Modern',
+    desc: 'Kearifan lokal herbal Nusantara dikombinasikan dengan teknologi pengolahan modern untuk hasil yang optimal.',
+  },
+  {
+    number: 4,
+    title: 'Aman Dikonsumsi Setiap Hari',
+    desc: 'Tanpa pengawet buatan, tanpa efek samping berbahaya — cocok untuk konsumsi jangka panjang seluruh keluarga.',
+  },
+];
+---
+
+<section id="keunggulan">
+  <div class="keunggulan-inner">
+    <div class="keunggulan-visual reveal">
+      <div class="keung-circle">
+        🌿
+        <div class="keung-orbit orbit-1">🔬</div>
+        <div class="keung-orbit orbit-2">☽</div>
+        <div class="keung-orbit orbit-3">🌾</div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <p class="section-label">Mengapa GoJamu?</p>
+      <h2 class="section-title">
+        Dibuat dengan<br />
+        <em>Standar Terbaik</em>
+      </h2>
+      <p class="section-desc" style="margin-bottom:32px;">
+        Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga dengan ilmu dan hati.
+      </p>
+      <div class="why-list">
+        {whyItems.map((item) => (
+          <div class="why-item">
+            <div class="why-num">{item.number}</div>
+            <div>
+              <div class="why-text-title">{item.title}</div>
+              <div class="why-text-desc">{item.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #keunggulan {
+    padding: 96px 5%;
+    background: var(--cream);
+  }
+  .keunggulan-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .keunggulan-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .keunggulan-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .keung-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #e0f2ea, #a8d8bf);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      transform: scale(1);
+      box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
+    }
+    50% {
+      transform: scale(1.03);
+      box-shadow: 0 28px 70px rgba(45, 106, 79, 0.3);
+    }
+  }
+  .keung-orbit {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+  .orbit-1 {
+    top: -10px;
+    right: 10px;
+  }
+  .orbit-2 {
+    bottom: 20px;
+    left: -10px;
+  }
+  .orbit-3 {
+    top: 40%;
+    right: -20px;
+  }
+
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .why-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 16px;
+    background: var(--warm);
+    border: 1px solid rgba(82, 183, 136, 0.15);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .why-item:hover {
+    border-color: var(--moss);
+    transform: translateX(4px);
+  }
+  .why-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--forest);
+    color: var(--gold-lt);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .why-text-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+  .why-text-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>

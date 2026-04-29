@@ -1,0 +1,129 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQItem[] = [
+  {
+    question: 'Apakah produk GoJamu aman dikonsumsi jangka panjang?',
+    answer:
+      'Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di BPOM. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.',
+  },
+  {
+    question: 'Berapa lama efek produk mulai terasa?',
+    answer:
+      'Umumnya efek mulai terasa dalam 2–4 minggu konsumsi rutin. Namun hasilnya bisa berbeda tergantung kondisi tubuh masing-masing. Untuk hasil optimal, disarankan konsumsi secara konsisten setiap hari.',
+  },
+  {
+    question: 'Apakah GoJamu bisa dikonsumsi bersamaan dengan obat dokter?',
+    answer:
+      'Secara umum aman, namun kami sangat menyarankan untuk berkonsultasi terlebih dahulu dengan dokter Anda, terutama jika sedang dalam pengobatan aktif. Tim kami juga siap membantu menjawab pertanyaan seputar ini via WhatsApp.',
+  },
+  {
+    question: 'Bagaimana cara memesan dan metode pengiriman?',
+    answer:
+      'Pemesanan dilakukan via WhatsApp. Kami melayani pengiriman ke seluruh Indonesia dengan berbagai jasa ekspedisi. Chat kami sekarang untuk konfirmasi stok, harga, dan estimasi waktu pengiriman ke kota Anda.',
+  },
+  {
+    question: 'Apakah ada garansi atau jaminan kepuasan?',
+    answer:
+      'GoJamu berkomitmen penuh terhadap kualitas produk. Jika Anda memiliki keluhan terkait produk yang diterima, hubungi kami via WhatsApp dan kami akan memberikan solusi terbaik untuk Anda.',
+  },
+];
+---
+
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <p class="section-label">Pertanyaan Umum</p>
+      <h2 class="section-title">
+        Ada yang Ingin<br />
+        <em>Ditanyakan?</em>
+      </h2>
+    </div>
+    {faqs.map((faq, index) => (
+      <div class="faq-item reveal" style={`transition-delay:${index * 0.05}s`}>
+        <div class="faq-q" onclick={`toggleFaq(this)`}>
+          {faq.question}
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">{faq.answer}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  #faq {
+    padding: 88px 5%;
+    background: var(--warm);
+  }
+  .faq-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(82, 183, 136, 0.2);
+    padding: 20px 0;
+  }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 16px;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+  .faq-q:hover {
+    color: var(--herb);
+  }
+  .faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(82, 183, 136, 0.12);
+    color: var(--herb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    padding-top: 12px;
+  }
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: var(--herb);
+    color: var(--white);
+  }
+</style>
+
+<script>
+  function toggleFaq(el: HTMLElement) {
+    const item = el.closest('.faq-item');
+    if (!item) return;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
