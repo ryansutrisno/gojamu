@@ -44,7 +44,7 @@ const faqs: FAQItem[] = [
     </div>
     {faqs.map((faq, index) => (
       <div class="faq-item reveal" style={`transition-delay:${index * 0.05}s`}>
-        <div class="faq-q" onclick={`toggleFaq(this)`}>
+        <div class="faq-q">
           {faq.question}
           <span class="faq-icon">+</span>
         </div>
@@ -81,6 +81,8 @@ const faqs: FAQItem[] = [
     font-size: 1rem;
     font-weight: 500;
     color: var(--text-main);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .faq-q:hover {
     color: var(--herb);
@@ -119,11 +121,25 @@ const faqs: FAQItem[] = [
 </style>
 
 <script>
-  function toggleFaq(el: HTMLElement) {
-    const item = el.closest('.faq-item');
-    if (!item) return;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
+  // FAQ Accordion - Vanilla JS for client-side interaction
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach((item) => {
+      const faqQ = item.querySelector('.faq-q');
+      if (faqQ) {
+        faqQ.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          
+          // Close all items
+          faqItems.forEach((i) => i.classList.remove('open'));
+          
+          // Open clicked item if it wasn't already open
+          if (!isOpen) {
+            item.classList.add('open');
+          }
+        });
+      }
+    });
+  });
 </script>
