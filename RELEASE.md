@@ -6,22 +6,38 @@ This project uses `semantic-release` for automatic version management and releas
 
 ## Initial Setup (One-Time)
 
-### 1. Create Initial Git Tag
-
-Before the first automatic release, create an initial tag:
+### 1. Merge Release Workflow to Main
 
 ```bash
-# Checkout to main branch
 git checkout main
+git merge fix/release-workflow-version
+git push origin main
+```
 
-# Create initial tag (if no tags exist)
+### 2. Clean Up Old Tags (If Any)
+
+If you have old `auto-*` tags from previous workflow:
+
+```bash
+# Run cleanup script
+bash scripts/cleanup-tags.sh
+
+# Or manual cleanup:
+git tag -d auto-*
+git push origin --delete auto-*
+```
+
+### 3. Create Initial Git Tag
+
+```bash
+# Create initial tag
 git tag v1.0.0
 
-# Push tag to trigger first release
+# Push tag (triggers first release)
 git push origin v1.0.0
 ```
 
-### 2. Configure GitHub Secrets
+### 4. Configure GitHub Secrets
 
 Go to GitHub Repository → Settings → Secrets and variables → Actions
 
