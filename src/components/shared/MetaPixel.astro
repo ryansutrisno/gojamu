@@ -1,0 +1,58 @@
+---
+/**
+ * Meta Pixel (Facebook Pixel) Integration
+ *
+ * Usage:
+ *   1. Set PUBLIC_META_PIXEL_ID in your environment (.env or Vercel dashboard)
+ *   2. This component auto-injects into <head> via BaseLayout
+ *
+ * Tracking events:
+ *   - Automatic: PageView (fires on every page load)
+ *   - Manual: Use window.fbq('track', 'EventName', { ...params }) in client scripts
+ *
+ * Common events: Lead, Purchase, AddToCart, Contact, CompleteRegistration
+ */
+
+const PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
+const HAS_PIXEL = PIXEL_ID.length > 0;
+
+const fbBase = 'https://connect.facebook.net/en_US/fbevents.js';
+const trBase = 'https://www.facebook.com/tr?id=';
+const noscriptUrl = trBase + PIXEL_ID + '&ev=PageView&noscript=1';
+
+const pixelScript =
+  '!function(){var f,b,e,v,n,t,s,fbq;f=b=fbq=function(){fbq.callMethod?' +
+  'fbq.callMethod.apply(fbq,arguments):fbq.queue.push(arguments)};if(!f._fbq)f._fbq=f;' +
+  "n=f.createElement('script');n.async=!0;" +
+  "n.src='" +
+  fbBase +
+  "';" +
+  "s=f.getElementsByTagName('script')[0];s.parentNode.insertBefore(n,s);" +
+  "fbq.init('" +
+  PIXEL_ID +
+  "');" +
+  "fbq.push('pageView');" +
+  "window.fbq=fbq;fbq.queue=fbq.queue||[];fbq.loaded=!0;fbq.version='2.0';" +
+  "fbq.agent='stago';" +
+  "}();";
+---
+
+{HAS_PIXEL && (
+  <>
+    <!-- Meta Pixel Base Code -->
+    <script set:html={pixelScript} />
+    <!-- End Meta Pixel Base Code -->
+
+    <!-- Meta Pixel Noscript -->
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src={noscriptUrl}
+        alt="facebook-pixel"
+      />
+    </noscript>
+    <!-- End Meta Pixel Noscript -->
+  </>
+)}
