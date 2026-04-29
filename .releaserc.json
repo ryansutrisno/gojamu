@@ -11,7 +11,7 @@
       {
         "preset": "conventionalcommits",
         "releaseRules": [
-          {"type": "init", "release": "1.0.0"},
+          {"type": "init", "release": "minor"},
           {"type": "feat", "release": "minor"},
           {"type": "fix", "release": "patch"},
           {"type": "perf", "release": "patch"},
