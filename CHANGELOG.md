@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/ryansutrisno/gojamu/compare/v1.1.0...v1.2.0) (2026-04-29)
+
+### Features
+
+* add Meta Pixel (Facebook Pixel) integration for ad tracking ([598899b](https://github.com/ryansutrisno/gojamu/commit/598899b9588d9c57f50065809e7ada14923dbc7d))
+
 ## [1.1.0](https://github.com/ryansutrisno/gojamu/compare/v1.0.0...v1.1.0) (2026-04-29)
 
 ### Features
