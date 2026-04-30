@@ -1,3 +1,10 @@
+## [1.4.0](https://github.com/ryansutrisno/gojamu/compare/v1.3.1...v1.4.0) (2026-04-30)
+
+### Features
+
+* add comprehensive SEO meta tags and Open Graph integration ([34d71c9](https://github.com/ryansutrisno/gojamu/commit/34d71c90bae234a0a4ee4c88514af1a3e0ac0f52))
+* update favicon to leaf.png ([e9d4046](https://github.com/ryansutrisno/gojamu/commit/e9d40463721e6d205ac55e8853b79fa93fe5436a))
+
 ## [1.3.1](https://github.com/ryansutrisno/gojamu/compare/v1.3.0...v1.3.1) (2026-04-29)
 
 ### Bug Fixes
