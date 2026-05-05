@@ -8,7 +8,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Apakah produk GoJamu aman dikonsumsi jangka panjang?',
     answer:
-      'Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di BPOM. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.',
+      'Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di PIRT. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.',
   },
   {
     question: 'Berapa lama efek produk mulai terasa?',
@@ -42,15 +42,20 @@ const faqs: FAQItem[] = [
         <em>Ditanyakan?</em>
       </h2>
     </div>
-    {faqs.map((faq, index) => (
-      <div class="faq-item reveal" style={`transition-delay:${index * 0.05}s`}>
-        <div class="faq-q">
-          {faq.question}
-          <span class="faq-icon">+</span>
+    {
+      faqs.map((faq, index) => (
+        <div
+          class="faq-item reveal"
+          style={`transition-delay:${index * 0.05}s`}
+        >
+          <div class="faq-q">
+            {faq.question}
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">{faq.answer}</div>
         </div>
-        <div class="faq-a">{faq.answer}</div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </section>
 
@@ -107,7 +112,9 @@ const faqs: FAQItem[] = [
     line-height: 1.75;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s;
+    transition:
+      max-height 0.4s ease,
+      padding 0.3s;
   }
   .faq-item.open .faq-a {
     max-height: 200px;
@@ -124,16 +131,16 @@ const faqs: FAQItem[] = [
   // FAQ Accordion - Vanilla JS for client-side interaction
   document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
-    
+
     faqItems.forEach((item) => {
       const faqQ = item.querySelector('.faq-q');
       if (faqQ) {
         faqQ.addEventListener('click', () => {
           const isOpen = item.classList.contains('open');
-          
+
           // Close all items
           faqItems.forEach((i) => i.classList.remove('open'));
-          
+
           // Open clicked item if it wasn't already open
           if (!isOpen) {
             item.classList.add('open');

@@ -12,12 +12,15 @@ import CTA from '../components/sections/CTA.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import ScrollReveal from '../components/shared/ScrollReveal.astro';
 
-const canonicalURL = new URL(Astro.url?.pathname || '/', 'https://gojamu.vercel.app').href;
+const canonicalURL = new URL(
+  Astro.url?.pathname || '/',
+  'https://gojamu.vercel.app',
+).href;
 ---
 
 <BaseLayout
   title="GoJamu – Herbal Alami untuk Hidup Sehat"
-  description="Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara — diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari. 100% alami, HALAL, BPOM terdaftar."
+  description="Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara — diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari. 100% alami, HALAL, PIRT terdaftar."
   image="/og-image.webp"
   canonicalURL={canonicalURL}
 >
