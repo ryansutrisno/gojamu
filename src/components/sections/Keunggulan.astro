@@ -15,7 +15,7 @@ const whyItems: WhyItem[] = [
   },
   {
     number: 2,
-    title: 'Tersertifikasi HALAL & BPOM',
+    title: 'Tersertifikasi HALAL & PIRT',
     desc: 'Proses produksi terstandar dan terdaftar resmi, sehingga aman untuk seluruh anggota keluarga Anda.',
   },
   {
@@ -36,9 +36,15 @@ const whyItems: WhyItem[] = [
     <div class="keunggulan-visual reveal">
       <div class="keung-circle">
         <div class="main-icon"><Icon name="leaf" emoji="🌿" size={48} /></div>
-        <div class="keung-orbit orbit-1"><Icon name="microscope" emoji="🔬" size={24} /></div>
-        <div class="keung-orbit orbit-2"><Icon name="crescent-moon" emoji="☽" size={24} /></div>
-        <div class="keung-orbit orbit-3"><Icon name="wheat" emoji="🌾" size={24} /></div>
+        <div class="keung-orbit orbit-1">
+          <Icon name="microscope" emoji="🔬" size={24} />
+        </div>
+        <div class="keung-orbit orbit-2">
+          <Icon name="crescent-moon" emoji="☽" size={24} />
+        </div>
+        <div class="keung-orbit orbit-3">
+          <Icon name="wheat" emoji="🌾" size={24} />
+        </div>
       </div>
     </div>
     <div class="reveal" style="transition-delay:.15s">
@@ -48,18 +54,21 @@ const whyItems: WhyItem[] = [
         <em>Standar Terbaik</em>
       </h2>
       <p class="section-desc" style="margin-bottom:32px;">
-        Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga dengan ilmu dan hati.
+        Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga
+        dengan ilmu dan hati.
       </p>
       <div class="why-list">
-        {whyItems.map((item) => (
-          <div class="why-item">
-            <div class="why-num">{item.number}</div>
-            <div>
-              <div class="why-text-title">{item.title}</div>
-              <div class="why-text-desc">{item.desc}</div>
+        {
+          whyItems.map((item) => (
+            <div class="why-item">
+              <div class="why-num">{item.number}</div>
+              <div>
+                <div class="why-text-title">{item.title}</div>
+                <div class="why-text-desc">{item.desc}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>
@@ -183,7 +192,9 @@ const whyItems: WhyItem[] = [
     border-radius: 16px;
     background: var(--warm);
     border: 1px solid rgba(82, 183, 136, 0.15);
-    transition: border-color 0.3s, transform 0.3s;
+    transition:
+      border-color 0.3s,
+      transform 0.3s;
   }
   .why-item:hover {
     border-color: var(--moss);
