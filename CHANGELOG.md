@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/ryansutrisno/gojamu/compare/v1.4.0...v1.4.1) (2026-05-05)
+
+### Documentation
+
+* update certification references from BPOM to PIRT ([4b0d141](https://github.com/ryansutrisno/gojamu/commit/4b0d14126df120f34d1a642416d7129d69013f94))
+
 ## [1.4.0](https://github.com/ryansutrisno/gojamu/compare/v1.3.1...v1.4.0) (2026-04-30)
 
 ### Features
