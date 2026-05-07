@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/ryansutrisno/gojamu/compare/v1.5.0...v1.6.0) (2026-05-07)
+
+### Features
+
+* **analytics:** add Vercel Analytics and improve OG image handling ([d727ed2](https://github.com/ryansutrisno/gojamu/commit/d727ed2c58e141cae4b81cb1ea9777576ec8ba98))
+
 ## [1.5.0](https://github.com/ryansutrisno/gojamu/compare/v1.4.1...v1.5.0) (2026-05-07)
 
 ### Features
