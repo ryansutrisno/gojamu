@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import KoGanTI from '../assets/KoGanTI.webp';
 import Nirlawa from '../assets/Nirlawa.webp';
 import Mahakunir from '../assets/Mahakunir.webp';
+import GojamuEn from '../assets/Gojamu-En.webp';
 
 export const locales = ['id', 'en'] as const;
 export type Locale = (typeof locales)[number];
@@ -49,6 +50,7 @@ export const translations = {
       title: 'GoJamu – Herbal Alami untuk Hidup Sehat',
       description:
         'Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara — diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari. 100% alami, HALAL, PIRT terdaftar.',
+      image: '/og-image.webp',
       imageAlt: 'GoJamu - Herbal Alami untuk Hidup Sehat',
     },
     nav: {
@@ -155,6 +157,7 @@ export const translations = {
     meta: {
       title: 'GoJamu – Natural Herbal Wellness for a Healthier Life',
       description: 'GoJamu herbal products are made from selected Indonesian botanicals and crafted with a modern formulation for everyday wellness. 100% natural, halal, and PIRT registered.',
+      image: GojamuEn,
       imageAlt: 'GoJamu - Natural Herbal Wellness for a Healthier Life',
     },
     nav: { ctaLabel: 'Ask Now', waMessage: 'Hi GoJamu, I would like to ask about your herbal products', languageLabel: 'Language' },
