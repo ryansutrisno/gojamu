@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import StickyWA from '../layout/StickyWA.astro';
+import Hero from '../sections/Hero.astro';
+import PainPoints from '../sections/PainPoints.astro';
+import ProductCards from '../sections/ProductCards.astro';
+import Keunggulan from '../sections/Keunggulan.astro';
+import Testimonials from '../sections/Testimonials.astro';
+import CTA from '../sections/CTA.astro';
+import FAQ from '../sections/FAQ.astro';
+import ScrollReveal from '../shared/ScrollReveal.astro';
+import {
+  getAlternateLinks,
+  getAlternateLocale,
+  getLocalePath,
+  getTranslation,
+  localeLabels,
+  localeNames,
+  ogLocales,
+  type Locale,
+} from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const alternateLocale = getAlternateLocale(locale);
+const canonicalURL = new URL(getLocalePath(locale), 'https://gojamu.vercel.app').toString();
+const alternateLinks = getAlternateLinks();
+---
+
+<BaseLayout
+  title={t.meta.title}
+  description={t.meta.description}
+  image="/og-image.webp"
+  imageAlt={t.meta.imageAlt}
+  canonicalURL={canonicalURL}
+  lang={locale}
+  ogLocale={ogLocales[locale]}
+  alternateLinks={alternateLinks}
+>
+  <ScrollReveal />
+  <Navbar
+    ctaLabel={t.nav.ctaLabel}
+    waMessage={t.nav.waMessage}
+    currentLocale={locale}
+    alternateLocale={alternateLocale}
+    alternateHref={getLocalePath(alternateLocale)}
+    alternateLabel={localeLabels[alternateLocale]}
+    alternateName={localeNames[alternateLocale]}
+    languageLabel={t.nav.languageLabel}
+  />
+  <Hero copy={t.hero} />
+  <PainPoints copy={t.painPoints} />
+  <ProductCards copy={t.productCards} products={t.products} />
+  <Keunggulan copy={t.benefits} />
+  <Testimonials copy={t.testimonialsSection} testimonials={t.testimonials} />
+  <CTA copy={t.cta} />
+  <FAQ copy={t.faq} />
+  <Footer tagline={t.footer.tagline} copyright={t.footer.copyright} />
+  <StickyWA label={t.stickyWA.label} ariaLabel={t.stickyWA.ariaLabel} waMessage={t.stickyWA.waMessage} />
+</BaseLayout>

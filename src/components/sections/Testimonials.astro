@@ -1,14 +1,33 @@
 ---
-import { testimonials, type Testimonial } from '../../data/testimonials';
+import type { Testimonial } from '../../i18n';
 import Icon from '../shared/Icon.astro';
+
+interface TestimonialsCopy {
+  label: string;
+  titlePrefix: string;
+  titleEmphasis: string;
+}
+
+interface Props {
+  testimonials?: Testimonial[];
+  copy?: TestimonialsCopy;
+}
+
+const defaultCopy: TestimonialsCopy = {
+  label: 'Kata Mereka',
+  titlePrefix: 'Ribuan Keluarga Sudah',
+  titleEmphasis: 'Merasakannya',
+};
+
+const { testimonials = [], copy = defaultCopy } = Astro.props;
 ---
 
 <section id="testimoni">
   <div class="testimoni-header reveal">
-    <p class="section-label">Kata Mereka</p>
+    <p class="section-label">{copy.label}</p>
     <h2 class="section-title">
-      Ribuan Keluarga Sudah<br />
-      <em>Merasakannya</em>
+      {copy.titlePrefix}<br />
+      <em>{copy.titleEmphasis}</em>
     </h2>
     <div class="divider-leaf">🌿 ✦ 🌿</div>
   </div>
