@@ -8,49 +8,67 @@ interface PainPoint {
   desc: string;
 }
 
-const painPoints: PainPoint[] = [
-  {
-    icon: 'tired',
-    emoji: '😓',
-    title: 'Mudah Lelah & Kurang Bertenaga',
-    desc: 'Tubuh terasa berat, semangat menurun, produktivitas terganggu sejak pagi hari.',
-  },
-  {
-    icon: 'nauseated',
-    emoji: '🤢',
-    title: 'Lambung Sering Tidak Nyaman',
-    desc: 'Perut kembung, mual, atau nyeri lambung yang mengganggu aktivitas sehari-hari.',
-  },
-  {
-    icon: 'sad',
-    emoji: '😔',
-    title: 'Kulit Kusam & Tidak Glowing',
-    desc: 'Kulit terlihat lelah, tidak cerah, dan tidak memancarkan kecantikan alami Anda.',
-  },
-  {
-    icon: 'shield',
-    emoji: '🛡️',
-    title: 'Imun Lemah, Mudah Sakit',
-    desc: 'Daya tahan tubuh menurun, rentan terhadap virus dan bakteri di sekitar kita.',
-  },
-];
+interface PainPointsCopy {
+  label: string;
+  titlePrefix: string;
+  titleEmphasis: string;
+  description: string;
+  items: readonly PainPoint[];
+}
+
+const defaultCopy: PainPointsCopy = {
+  label: 'Apakah Anda Merasakannya?',
+  titlePrefix: 'Tubuh Anda Butuh',
+  titleEmphasis: 'Perhatian Lebih',
+  description:
+    'Gaya hidup modern membuat tubuh kita rentan terhadap berbagai gangguan kesehatan. GoJamu hadir sebagai solusi alami dari bumi Nusantara.',
+  items: [
+    {
+      icon: 'tired',
+      emoji: '😓',
+      title: 'Mudah Lelah & Kurang Bertenaga',
+      desc: 'Tubuh terasa berat, semangat menurun, produktivitas terganggu sejak pagi hari.',
+    },
+    {
+      icon: 'nauseated',
+      emoji: '🤢',
+      title: 'Lambung Sering Tidak Nyaman',
+      desc: 'Perut kembung, mual, atau nyeri lambung yang mengganggu aktivitas sehari-hari.',
+    },
+    {
+      icon: 'sad',
+      emoji: '😔',
+      title: 'Kulit Kusam & Tidak Glowing',
+      desc: 'Kulit terlihat lelah, tidak cerah, dan tidak memancarkan kecantikan alami Anda.',
+    },
+    {
+      icon: 'shield',
+      emoji: '🛡️',
+      title: 'Imun Lemah, Mudah Sakit',
+      desc: 'Daya tahan tubuh menurun, rentan terhadap virus dan bakteri di sekitar kita.',
+    },
+  ],
+};
+
+interface Props {
+  copy?: PainPointsCopy;
+}
+
+const { copy = defaultCopy } = Astro.props;
 ---
 
 <section id="masalah">
   <div style="max-width:1100px;margin:0 auto;">
     <div class="reveal">
-      <p class="section-label">Apakah Anda Merasakannya?</p>
+      <p class="section-label">{copy.label}</p>
       <h2 class="section-title">
-        Tubuh Anda Butuh<br />
-        Perhatian Lebih
+        {copy.titlePrefix}<br />
+        {copy.titleEmphasis}
       </h2>
-      <p class="section-desc">
-        Gaya hidup modern membuat tubuh kita rentan terhadap berbagai gangguan kesehatan. GoJamu hadir
-        sebagai solusi alami dari bumi Nusantara.
-      </p>
+      <p class="section-desc">{copy.description}</p>
     </div>
     <div class="pain-grid reveal" style="transition-delay:.15s">
-      {painPoints.map((point) => (
+      {copy.items.map((point) => (
         <div class="pain-card">
           <div class="pain-icon"><Icon name={point.icon} emoji={point.emoji} size={32} /></div>
           <div class="pain-title">{point.title}</div>

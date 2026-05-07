@@ -1,58 +1,76 @@
 ---
 interface FAQItem {
-  question: string;
-  answer: string;
+  q: string;
+  a: string;
 }
 
-const faqs: FAQItem[] = [
-  {
-    question: 'Apakah produk GoJamu aman dikonsumsi jangka panjang?',
-    answer:
-      'Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di PIRT. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.',
-  },
-  {
-    question: 'Berapa lama efek produk mulai terasa?',
-    answer:
-      'Umumnya efek mulai terasa dalam 2–4 minggu konsumsi rutin. Namun hasilnya bisa berbeda tergantung kondisi tubuh masing-masing. Untuk hasil optimal, disarankan konsumsi secara konsisten setiap hari.',
-  },
-  {
-    question: 'Apakah GoJamu bisa dikonsumsi bersamaan dengan obat dokter?',
-    answer:
-      'Secara umum aman, namun kami sangat menyarankan untuk berkonsultasi terlebih dahulu dengan dokter Anda, terutama jika sedang dalam pengobatan aktif. Tim kami juga siap membantu menjawab pertanyaan seputar ini via WhatsApp.',
-  },
-  {
-    question: 'Bagaimana cara memesan dan metode pengiriman?',
-    answer:
-      'Pemesanan dilakukan via WhatsApp. Kami melayani pengiriman ke seluruh Indonesia dengan berbagai jasa ekspedisi. Chat kami sekarang untuk konfirmasi stok, harga, dan estimasi waktu pengiriman ke kota Anda.',
-  },
-  {
-    question: 'Apakah ada garansi atau jaminan kepuasan?',
-    answer:
-      'GoJamu berkomitmen penuh terhadap kualitas produk. Jika Anda memiliki keluhan terkait produk yang diterima, hubungi kami via WhatsApp dan kami akan memberikan solusi terbaik untuk Anda.',
-  },
-];
+interface FAQCopy {
+  label: string;
+  titlePrefix: string;
+  titleEmphasis: string;
+  items: readonly FAQItem[];
+}
+
+const defaultCopy: FAQCopy = {
+  label: 'Pertanyaan Umum',
+  titlePrefix: 'Ada yang Ingin',
+  titleEmphasis: 'Ditanyakan?',
+  items: [
+    {
+      q: 'Apakah produk GoJamu aman dikonsumsi jangka panjang?',
+      a:
+        'Ya, semua produk GoJamu dibuat dari bahan alami 100% tanpa pengawet buatan dan telah mendapatkan sertifikasi HALAL serta terdaftar di PIRT. Aman untuk dikonsumsi setiap hari dalam jangka panjang oleh seluruh keluarga.',
+    },
+    {
+      q: 'Berapa lama efek produk mulai terasa?',
+      a:
+        'Umumnya efek mulai terasa dalam 2–4 minggu konsumsi rutin. Namun hasilnya bisa berbeda tergantung kondisi tubuh masing-masing. Untuk hasil optimal, disarankan konsumsi secara konsisten setiap hari.',
+    },
+    {
+      q: 'Apakah GoJamu bisa dikonsumsi bersamaan dengan obat dokter?',
+      a:
+        'Secara umum aman, namun kami sangat menyarankan untuk berkonsultasi terlebih dahulu dengan dokter Anda, terutama jika sedang dalam pengobatan aktif. Tim kami juga siap membantu menjawab pertanyaan seputar ini via WhatsApp.',
+    },
+    {
+      q: 'Bagaimana cara memesan dan metode pengiriman?',
+      a:
+        'Pemesanan dilakukan via WhatsApp. Kami melayani pengiriman ke seluruh Indonesia dengan berbagai jasa ekspedisi. Chat kami sekarang untuk konfirmasi stok, harga, dan estimasi waktu pengiriman ke kota Anda.',
+    },
+    {
+      q: 'Apakah ada garansi atau jaminan kepuasan?',
+      a:
+        'GoJamu berkomitmen penuh terhadap kualitas produk. Jika Anda memiliki keluhan terkait produk yang diterima, hubungi kami via WhatsApp dan kami akan memberikan solusi terbaik untuk Anda.',
+    },
+  ],
+};
+
+interface Props {
+  copy?: FAQCopy;
+}
+
+const { copy = defaultCopy } = Astro.props;
 ---
 
 <section id="faq">
   <div class="faq-inner">
     <div class="faq-header reveal">
-      <p class="section-label">Pertanyaan Umum</p>
+      <p class="section-label">{copy.label}</p>
       <h2 class="section-title">
-        Ada yang Ingin<br />
-        <em>Ditanyakan?</em>
+        {copy.titlePrefix}<br />
+        <em>{copy.titleEmphasis}</em>
       </h2>
     </div>
     {
-      faqs.map((faq, index) => (
+      copy.items.map((faq, index) => (
         <div
           class="faq-item reveal"
           style={`transition-delay:${index * 0.05}s`}
         >
           <div class="faq-q">
-            {faq.question}
+            {faq.q}
             <span class="faq-icon">+</span>
           </div>
-          <div class="faq-a">{faq.answer}</div>
+          <div class="faq-a">{faq.a}</div>
         </div>
       ))
     }

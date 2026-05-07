@@ -2,33 +2,53 @@
 import Icon from '../shared/Icon.astro';
 
 interface WhyItem {
-  number: number;
+  number: number | string;
   title: string;
   desc: string;
 }
 
-const whyItems: WhyItem[] = [
-  {
-    number: 1,
-    title: 'Bahan Herbal 100% Pilihan',
-    desc: 'Setiap bahan dipilih secara ketat dari sumber terpercaya di seluruh Nusantara, tanpa campuran bahan kimia berbahaya.',
-  },
-  {
-    number: 2,
-    title: 'Tersertifikasi HALAL & PIRT',
-    desc: 'Proses produksi terstandar dan terdaftar resmi, sehingga aman untuk seluruh anggota keluarga Anda.',
-  },
-  {
-    number: 3,
-    title: 'Formulasi Ilmiah Modern',
-    desc: 'Kearifan lokal herbal Nusantara dikombinasikan dengan teknologi pengolahan modern untuk hasil yang optimal.',
-  },
-  {
-    number: 4,
-    title: 'Aman Dikonsumsi Setiap Hari',
-    desc: 'Tanpa pengawet buatan, tanpa efek samping berbahaya — cocok untuk konsumsi jangka panjang seluruh keluarga.',
-  },
-];
+interface BenefitsCopy {
+  label: string;
+  titlePrefix: string;
+  titleEmphasis: string;
+  description: string;
+  items: readonly WhyItem[];
+}
+
+const defaultCopy: BenefitsCopy = {
+  label: 'Mengapa GoJamu?',
+  titlePrefix: 'Dibuat dengan',
+  titleEmphasis: 'Standar Terbaik',
+  description: 'Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga dengan ilmu dan hati.',
+  items: [
+    {
+      number: 1,
+      title: 'Bahan Herbal 100% Pilihan',
+      desc: 'Setiap bahan dipilih secara ketat dari sumber terpercaya di seluruh Nusantara, tanpa campuran bahan kimia berbahaya.',
+    },
+    {
+      number: 2,
+      title: 'Tersertifikasi HALAL & PIRT',
+      desc: 'Proses produksi terstandar dan terdaftar resmi, sehingga aman untuk seluruh anggota keluarga Anda.',
+    },
+    {
+      number: 3,
+      title: 'Formulasi Ilmiah Modern',
+      desc: 'Kearifan lokal herbal Nusantara dikombinasikan dengan teknologi pengolahan modern untuk hasil yang optimal.',
+    },
+    {
+      number: 4,
+      title: 'Aman Dikonsumsi Setiap Hari',
+      desc: 'Tanpa pengawet buatan, tanpa efek samping berbahaya — cocok untuk konsumsi jangka panjang seluruh keluarga.',
+    },
+  ],
+};
+
+interface Props {
+  copy?: BenefitsCopy;
+}
+
+const { copy = defaultCopy } = Astro.props;
 ---
 
 <section id="keunggulan">
@@ -48,18 +68,15 @@ const whyItems: WhyItem[] = [
       </div>
     </div>
     <div class="reveal" style="transition-delay:.15s">
-      <p class="section-label">Mengapa GoJamu?</p>
+      <p class="section-label">{copy.label}</p>
       <h2 class="section-title">
-        Dibuat dengan<br />
-        <em>Standar Terbaik</em>
+        {copy.titlePrefix}<br />
+        <em>{copy.titleEmphasis}</em>
       </h2>
-      <p class="section-desc" style="margin-bottom:32px;">
-        Kami percaya bahwa kesehatan terbaik berasal dari alam yang dijaga
-        dengan ilmu dan hati.
-      </p>
+      <p class="section-desc" style="margin-bottom:32px;">{copy.description}</p>
       <div class="why-list">
         {
-          whyItems.map((item) => (
+          copy.items.map((item) => (
             <div class="why-item">
               <div class="why-num">{item.number}</div>
               <div>

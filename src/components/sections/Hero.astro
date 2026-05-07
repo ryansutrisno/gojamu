@@ -2,46 +2,77 @@
 import Icon from '../shared/Icon.astro';
 import {buildWALink} from '../../utils/wa';
 
+interface HeroCopy {
+  waMessage: string;
+  badge: string;
+  titlePrefix: string;
+  titleEmphasis: string;
+  subtitle: string;
+  products: readonly string[];
+  primaryCta: string;
+  secondaryCta: string;
+  trustItems: readonly { value: string; label: string }[];
+}
+
 interface Props {
   waLink?: string;
+  copy?: HeroCopy;
   learnMoreLink?: string;
 }
 
+const defaultCopy: HeroCopy = {
+  waMessage: 'Halo GoJamu, saya ingin tahu lebih lanjut tentang produk herbal Anda',
+  badge: '100% Herbal Alami · Tanpa Bahan Kimia',
+  titlePrefix: 'Tubuh Sehat Dimulai dari',
+  titleEmphasis: 'Alam yang Terjaga',
+  subtitle:
+    'Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara — diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari.',
+  products: ['Ko Gan Ti – Anti Kanker', 'Nirlawa – Lambung Sehat', 'Mahakunir – Cantik Alami'],
+  primaryCta: 'Chat WhatsApp Sekarang',
+  secondaryCta: 'Lihat Produk ↓',
+  trustItems: [
+    { value: 'HALAL', label: 'Tersertifikasi' },
+    { value: '100% Alami', label: 'Tanpa Pengawet' },
+    { value: 'Teruji Klinis', label: 'PIRT Terdaftar' },
+    { value: 'Kirim Cepat', label: 'Seluruh Indonesia' },
+  ],
+};
+
 const {
-  waLink = buildWALink(
-    'Halo GoJamu, saya ingin tahu lebih lanjut tentang produk herbal Anda',
-  ),
+  copy = defaultCopy,
+  waLink,
   learnMoreLink = '#produk',
 } = Astro.props;
+
+const resolvedWaLink = waLink ?? buildWALink(copy.waMessage);
 ---
 
 <section id="hero">
   <div class="hero-badge">
-    <Icon name="leaf" emoji="🌿" size={14} /> 100% Herbal Alami · Tanpa Bahan Kimia
+    <Icon name="leaf" emoji="🌿" size={14} /> {copy.badge}
   </div>
   <h1 class="hero-title">
-    Tubuh Sehat Dimulai dari<br />
-    <em>Alam yang Terjaga</em>
+    {copy.titlePrefix}<br />
+    <em>{copy.titleEmphasis}</em>
   </h1>
   <p class="hero-sub">
-    Produk jamu herbal GoJamu hadir dari bahan-bahan pilihan alam Nusantara —
-    diformulasikan modern untuk kehidupan Anda yang lebih sehat setiap hari.
+    {copy.subtitle}
   </p>
 
   <div class="hero-products">
     <div class="prod-pill pill-green">
-      <Icon name="leaf" emoji="🍃" size={16} /> Ko Gan Ti – Anti Kanker
+      <Icon name="leaf" emoji="🍃" size={16} /> {copy.products[0]}
     </div>
     <div class="prod-pill pill-blue">
-      <Icon name="heart" emoji="💙" size={16} /> Nirlawa – Lambung Sehat
+      <Icon name="heart" emoji="💙" size={16} /> {copy.products[1]}
     </div>
     <div class="prod-pill pill-rose">
-      <Icon name="flower" emoji="🌸" size={16} /> Mahakunir – Cantik Alami
+      <Icon name="flower" emoji="🌸" size={16} /> {copy.products[2]}
     </div>
   </div>
 
   <div class="hero-cta-wrap">
-    <a href={waLink} class="btn-primary btn-wa" target="_blank">
+    <a href={resolvedWaLink} class="btn-primary btn-wa" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path
           d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
@@ -50,9 +81,9 @@ const {
           d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.87.518 3.617 1.418 5.115L2 22l5.545-1.395A9.456 9.456 0 0 0 11.5 21C16.747 21 21 16.747 21 11.5S16.747 2 11.5 2zm0 17.25a7.72 7.72 0 0 1-3.938-1.079l-.282-.168-2.928.736.78-2.852-.184-.293A7.718 7.718 0 0 1 3.75 11.5C3.75 7.216 7.216 3.75 11.5 3.75S19.25 7.216 19.25 11.5 15.784 19.25 11.5 19.25z"
         ></path>
       </svg>
-      Chat WhatsApp Sekarang
+      {copy.primaryCta}
     </a>
-    <a href={learnMoreLink} class="btn-outline"> Lihat Produk ↓ </a>
+    <a href={learnMoreLink} class="btn-outline"> {copy.secondaryCta} </a>
   </div>
 
   <div class="trust-row">
@@ -61,15 +92,15 @@ const {
         <Icon name="check-circle" emoji="✅" size={20} />
       </div>
       <div>
-        <strong>HALAL</strong><br />
-        Tersertifikasi
+        <strong>{copy.trustItems[0].value}</strong><br />
+        {copy.trustItems[0].label}
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon"><Icon name="leaf" emoji="🌿" size={20} /></div>
       <div>
-        <strong>100% Alami</strong><br />
-        Tanpa Pengawet
+        <strong>{copy.trustItems[1].value}</strong><br />
+        {copy.trustItems[1].label}
       </div>
     </div>
     <div class="trust-item">
@@ -77,15 +108,15 @@ const {
         <Icon name="microscope" emoji="🔬" size={20} />
       </div>
       <div>
-        <strong>Teruji Klinis</strong><br />
-        PIRT Terdaftar
+        <strong>{copy.trustItems[2].value}</strong><br />
+        {copy.trustItems[2].label}
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon"><Icon name="truck" emoji="🚚" size={20} /></div>
       <div>
-        <strong>Kirim Cepat</strong><br />
-        Seluruh Indonesia
+        <strong>{copy.trustItems[3].value}</strong><br />
+        {copy.trustItems[3].label}
       </div>
     </div>
   </div>
