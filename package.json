@@ -24,6 +24,7 @@
   "homepage": "https://github.com/ryansutrisno/gojamu#readme",
   "dependencies": {
     "@astrojs/vercel": "^8.2.11",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^5.18.1"
   },
   "devDependencies": {
