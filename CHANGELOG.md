@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/ryansutrisno/gojamu/compare/v1.6.0...v1.7.0) (2026-08-08)
+
+### Features
+
+* add dynamic country redirect and update wa fallback number ([7f40dc7](https://github.com/ryansutrisno/gojamu/commit/7f40dc7f265b4ba32ffdbc4ead85cb9f513fa747))
+
 ## [1.6.0](https://github.com/ryansutrisno/gojamu/compare/v1.5.0...v1.6.0) (2026-05-07)
 
 ### Features
