@@ -10,7 +10,7 @@ export function getWA_NUMBER(): string {
   const num = import.meta.env.PUBLIC_WHATSAPP_NUMBER;
   if (!num) {
     console.warn('[WA] PUBLIC_WHATSAPP_NUMBER is not set in environment');
-    return '6281225463341'; // fallback
+    return '628562926377'; // fallback
   }
   return num;
 }

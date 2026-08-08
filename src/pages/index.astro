@@ -1,3 +1,6 @@
 ---
-return Astro.redirect('/id/');
+const country = Astro.request.headers.get('x-vercel-ip-country')?.toUpperCase();
+const targetLocalePath = country === 'ID' || !country ? '/id/' : '/en/';
+
+return Astro.redirect(targetLocalePath);
 ---
