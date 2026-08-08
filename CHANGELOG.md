@@ -1,3 +1,15 @@
+## [1.6.0](https://github.com/ryansutrisno/gojamu/compare/v1.5.0...v1.6.0) (2026-05-07)
+
+### Features
+
+* **analytics:** add Vercel Analytics and improve OG image handling ([d727ed2](https://github.com/ryansutrisno/gojamu/commit/d727ed2c58e141cae4b81cb1ea9777576ec8ba98))
+
+## [1.5.0](https://github.com/ryansutrisno/gojamu/compare/v1.4.1...v1.5.0) (2026-05-07)
+
+### Features
+
+* **i18n:** add internationalization support for English and Indonesian ([7c3ed8f](https://github.com/ryansutrisno/gojamu/commit/7c3ed8fbb5516211e46a3e4018c30e3523a1d29c))
+
 ## [1.4.1](https://github.com/ryansutrisno/gojamu/compare/v1.4.0...v1.4.1) (2026-05-05)
 
 ### Documentation
